@@ -1,20 +1,31 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizSignIn.dart';
+import 'package:quiz_prokit/services/background_service.dart';
+import 'package:quiz_prokit/services/connection_service.dart';
 import 'package:quiz_prokit/store/AppStore.dart';
 import 'package:quiz_prokit/utils/AppTheme.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
 import 'package:quiz_prokit/utils/QuizDataGenerator.dart';
+import 'package:permission_handler/permission_handler.dart';
 
+import 'services/notification_service.dart';
 
 AppStore appStore = AppStore();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
 
   await initialize(aLocaleLanguageList: languageList());
+  await NotificationService.initNotification();
+  await BackgroundService.initializeService();
+ 
 
   appStore.toggleDarkMode(value: getBoolAsync(isDarkModeOnPref));
 
@@ -34,7 +45,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Online Quiz${!isMobile ? ' ${platformName()}' : ''}',
         home: QuizSignIn(),
-        theme: !appStore.isDarkModeOn ? AppThemeData.lightTheme : AppThemeData.darkTheme,
+        theme: !appStore.isDarkModeOn
+            ? AppThemeData.lightTheme
+            : AppThemeData.darkTheme,
         navigatorKey: navigatorKey,
         scrollBehavior: SBehavior(),
         supportedLocales: LanguageDataModel.languageLocales(),

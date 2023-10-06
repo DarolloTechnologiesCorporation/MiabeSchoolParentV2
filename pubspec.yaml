@@ -16,9 +16,9 @@ dependencies:
   # Base
   cupertino_icons: ^1.0.6
   nb_utils: ^6.0.3
-  intl: ^0.17.0
+  intl: ^0.18.1
   flutter_vector_icons: ^2.0.0
-  google_fonts: ^5.1.0
+  google_fonts: ^6.1.0
 
   # State Management
   mobx: ^2.2.0
@@ -26,7 +26,7 @@ dependencies:
 
   # Quiz
   cached_network_image: ^3.2.3
-  flutter_staggered_grid_view: ^0.6.2
+  flutter_staggered_grid_view: ^0.7.0
   url_launcher: ^6.1.11
   flutter_svg: ^2.0.7
   percent_indicator: ^4.2.3
@@ -37,7 +37,19 @@ dependencies:
   table_calendar:
   sqflite: ^2.3.0
   path: ^1.8.3
+  flutter_local_notifications: ^16.0.0+1
+  http: ^1.1.0
+  device_info_plus: ^9.0.3
+  flutter_background_service: ^5.0.1
+  flutter_background_service_android: ^6.0.1
+  shared_preferences: ^2.2.1
 
+  signalr_netcore:
+    git:
+      url: https://github.com/geekz-reno/signalr_client.git
+      ref: master
+  permission_handler: ^11.0.1
+  connectivity_plus: ^4.0.2
 
 dev_dependencies:
   flutter_test:

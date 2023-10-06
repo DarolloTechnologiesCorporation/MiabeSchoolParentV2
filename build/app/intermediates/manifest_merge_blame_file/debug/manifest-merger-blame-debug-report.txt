@@ -12,93 +12,150 @@
 12         to allow setting breakpoints, to provide hot reload, etc.
 13    -->
 14    <uses-permission android:name="android.permission.INTERNET" />
-14-->/home/flex/Desktop/quiz_prokit/android/app/src/main/AndroidManifest.xml:4:5-67
-14-->/home/flex/Desktop/quiz_prokit/android/app/src/main/AndroidManifest.xml:4:22-64
-15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-15-->/home/flex/Desktop/quiz_prokit/android/app/src/main/AndroidManifest.xml:5:5-79
-15-->/home/flex/Desktop/quiz_prokit/android/app/src/main/AndroidManifest.xml:5:22-76
-16    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-16-->/home/flex/Desktop/quiz_prokit/android/app/src/main/AndroidManifest.xml:6:5-79
-16-->/home/flex/Desktop/quiz_prokit/android/app/src/main/AndroidManifest.xml:6:22-76
-17    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-17-->/home/flex/Desktop/quiz_prokit/android/app/src/main/AndroidManifest.xml:7:5-81
-17-->/home/flex/Desktop/quiz_prokit/android/app/src/main/AndroidManifest.xml:7:22-78
-18    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-18-->/home/flex/Desktop/quiz_prokit/android/app/src/main/AndroidManifest.xml:8:5-72
-18-->/home/flex/Desktop/quiz_prokit/android/app/src/main/AndroidManifest.xml:8:22-69
-19
-20    <permission
-20-->[androidx.core:core:1.10.1] /home/flex/.gradle/caches/transforms-3/061257597f1b771deff34ab950313c95/transformed/core-1.10.1/AndroidManifest.xml:22:5-24:47
-21        android:name="com.example.quiz_prokit.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-21-->[androidx.core:core:1.10.1] /home/flex/.gradle/caches/transforms-3/061257597f1b771deff34ab950313c95/transformed/core-1.10.1/AndroidManifest.xml:23:9-81
-22        android:protectionLevel="signature" />
-22-->[androidx.core:core:1.10.1] /home/flex/.gradle/caches/transforms-3/061257597f1b771deff34ab950313c95/transformed/core-1.10.1/AndroidManifest.xml:24:9-44
-23
-24    <uses-permission android:name="com.example.quiz_prokit.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-24-->[androidx.core:core:1.10.1] /home/flex/.gradle/caches/transforms-3/061257597f1b771deff34ab950313c95/transformed/core-1.10.1/AndroidManifest.xml:26:5-97
-24-->[androidx.core:core:1.10.1] /home/flex/.gradle/caches/transforms-3/061257597f1b771deff34ab950313c95/transformed/core-1.10.1/AndroidManifest.xml:26:22-94
+14-->D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\android\app\src\main\AndroidManifest.xml:4:5-67
+14-->D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\android\app\src\main\AndroidManifest.xml:4:22-64
+15    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+15-->D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\android\app\src\main\AndroidManifest.xml:5:5-79
+15-->D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\android\app\src\main\AndroidManifest.xml:5:22-76
+16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+16-->D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\android\app\src\main\AndroidManifest.xml:6:5-79
+16-->D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\android\app\src\main\AndroidManifest.xml:6:22-76
+17    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+17-->D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\android\app\src\main\AndroidManifest.xml:7:5-79
+17-->D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\android\app\src\main\AndroidManifest.xml:7:22-76
+18    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+18-->D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\android\app\src\main\AndroidManifest.xml:8:5-81
+18-->D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\android\app\src\main\AndroidManifest.xml:8:22-78
+19    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+19-->D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\android\app\src\main\AndroidManifest.xml:9:5-72
+19-->D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\android\app\src\main\AndroidManifest.xml:9:22-69
+20    <uses-permission android:name="android.permission.VIBRATE" />
+20-->[:flutter_local_notifications] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-66
+20-->[:flutter_local_notifications] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-63
+21    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+21-->[:flutter_local_notifications] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-77
+21-->[:flutter_local_notifications] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_local_notifications\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-74
+22    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+22-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-77
+22-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-74
+23    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+23-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-81
+23-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-78
+24    <uses-permission android:name="android.permission.WAKE_LOCK" />
+24-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-68
+24-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:22-65
 25
-26    <application
-27        android:name="android.app.Application"
-28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-28-->[androidx.core:core:1.10.1] /home/flex/.gradle/caches/transforms-3/061257597f1b771deff34ab950313c95/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
-29        android:debuggable="true"
-30        android:icon="@mipmap/ic_launcher"
-31        android:label="Online Quiz Flutter" >
-32        <activity
-33            android:name="com.example.quiz_prokit.MainActivity"
-34            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-35            android:exported="true"
-36            android:hardwareAccelerated="true"
-37            android:launchMode="singleTop"
-38            android:theme="@style/LaunchTheme"
-39            android:windowSoftInputMode="adjustResize" >
-40
-41            <!--
-42                 Specifies an Android theme to apply to this Activity as soon as
-43                 the Android process has started. This theme is visible to the user
-44                 while the Flutter UI initializes. After that, this theme continues
-45                 to determine the Window background behind the Flutter UI.
-46            -->
-47            <meta-data
-48                android:name="io.flutter.embedding.android.NormalTheme"
-49                android:resource="@style/NormalTheme" />
-50
-51            <intent-filter>
-52                <action android:name="android.intent.action.MAIN" />
-53
-54                <category android:name="android.intent.category.LAUNCHER" />
-55            </intent-filter>
-56        </activity>
-57        <!--
-58             Don't delete the meta-data below.
-59             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-60        -->
-61        <meta-data
-62            android:name="flutterEmbedding"
-63            android:value="2" />
-64
-65        <activity
-65-->[:url_launcher_android] /home/flex/Desktop/quiz_prokit/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-11:74
-66            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-66-->[:url_launcher_android] /home/flex/Desktop/quiz_prokit/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-74
-67            android:exported="false"
-67-->[:url_launcher_android] /home/flex/Desktop/quiz_prokit/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-37
-68            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-68-->[:url_launcher_android] /home/flex/Desktop/quiz_prokit/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-71
-69
-70        <uses-library
-70-->[androidx.window:window:1.0.0-beta04] /home/flex/.gradle/caches/transforms-3/c852a667309ae6065c2ca598e8238637/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
-71            android:name="androidx.window.extensions"
-71-->[androidx.window:window:1.0.0-beta04] /home/flex/.gradle/caches/transforms-3/c852a667309ae6065c2ca598e8238637/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
-72            android:required="false" />
-72-->[androidx.window:window:1.0.0-beta04] /home/flex/.gradle/caches/transforms-3/c852a667309ae6065c2ca598e8238637/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
-73        <uses-library
-73-->[androidx.window:window:1.0.0-beta04] /home/flex/.gradle/caches/transforms-3/c852a667309ae6065c2ca598e8238637/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
-74            android:name="androidx.window.sidecar"
-74-->[androidx.window:window:1.0.0-beta04] /home/flex/.gradle/caches/transforms-3/c852a667309ae6065c2ca598e8238637/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
-75            android:required="false" />
-75-->[androidx.window:window:1.0.0-beta04] /home/flex/.gradle/caches/transforms-3/c852a667309ae6065c2ca598e8238637/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
-76    </application>
-77
-78</manifest>
+26    <permission
+26-->[androidx.core:core:1.10.1] C:\Users\Edmond\.gradle\caches\transforms-3\231ec2f3974a290a98f192f816b5c513\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
+27        android:name="com.example.quiz_prokit.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+27-->[androidx.core:core:1.10.1] C:\Users\Edmond\.gradle\caches\transforms-3\231ec2f3974a290a98f192f816b5c513\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
+28        android:protectionLevel="signature" />
+28-->[androidx.core:core:1.10.1] C:\Users\Edmond\.gradle\caches\transforms-3\231ec2f3974a290a98f192f816b5c513\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
+29
+30    <uses-permission android:name="com.example.quiz_prokit.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+30-->[androidx.core:core:1.10.1] C:\Users\Edmond\.gradle\caches\transforms-3\231ec2f3974a290a98f192f816b5c513\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
+30-->[androidx.core:core:1.10.1] C:\Users\Edmond\.gradle\caches\transforms-3\231ec2f3974a290a98f192f816b5c513\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
+31
+32    <application
+33        android:name="android.app.Application"
+34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+34-->[androidx.core:core:1.10.1] C:\Users\Edmond\.gradle\caches\transforms-3\231ec2f3974a290a98f192f816b5c513\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
+35        android:debuggable="true"
+36        android:icon="@mipmap/ic_launcher"
+37        android:label="Online Quiz Flutter"
+38        android:usesCleartextTraffic="true" >
+39        <activity
+40            android:name="com.example.quiz_prokit.MainActivity"
+41            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+42            android:exported="true"
+43            android:hardwareAccelerated="true"
+44            android:launchMode="singleTop"
+45            android:theme="@style/LaunchTheme"
+46            android:windowSoftInputMode="adjustResize" >
+47
+48            <!--
+49                 Specifies an Android theme to apply to this Activity as soon as
+50                 the Android process has started. This theme is visible to the user
+51                 while the Flutter UI initializes. After that, this theme continues
+52                 to determine the Window background behind the Flutter UI.
+53            -->
+54            <meta-data
+55                android:name="io.flutter.embedding.android.NormalTheme"
+56                android:resource="@style/NormalTheme" />
+57
+58            <intent-filter>
+59                <action android:name="android.intent.action.MAIN" />
+60
+61                <category android:name="android.intent.category.LAUNCHER" />
+62            </intent-filter>
+63        </activity>
+64        <!--
+65             Don't delete the meta-data below.
+66             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+67        -->
+68        <meta-data
+69            android:name="flutterEmbedding"
+70            android:value="2" />
+71
+72        <activity
+72-->[:url_launcher_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-13:74
+73            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+73-->[:url_launcher_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
+74            android:exported="false"
+74-->[:url_launcher_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
+75            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+75-->[:url_launcher_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
+76
+77        <service
+77-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:9-18:44
+78            android:name="id.flutter.flutter_background_service.BackgroundService"
+78-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-83
+79            android:enabled="true"
+79-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-35
+80            android:exported="true"
+80-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-36
+81            android:stopWithTask="false" />
+81-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-41
+82
+83        <receiver
+83-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:20:9-23:39
+84            android:name="id.flutter.flutter_background_service.WatchdogReceiver"
+84-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-82
+85            android:enabled="true"
+85-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-35
+86            android:exported="true" />
+86-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:23:13-36
+87        <receiver
+87-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:24:9-32:20
+88            android:name="id.flutter.flutter_background_service.BootReceiver"
+88-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-78
+89            android:enabled="true"
+89-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:26:13-35
+90            android:exported="true" >
+90-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-36
+91            <intent-filter>
+91-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-31:29
+92                <action android:name="android.intent.action.BOOT_COMPLETED" />
+92-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:29:17-79
+92-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:29:25-76
+93                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+93-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:30:17-82
+93-->[:flutter_background_service_android] D:\Projets\DTC\MiabeSchool\Flutter\MiabeSchoolParentV2\build\flutter_background_service_android\intermediates\merged_manifest\debug\AndroidManifest.xml:30:25-79
+94            </intent-filter>
+95        </receiver>
+96
+97        <uses-library
+97-->[androidx.window:window:1.0.0-beta04] C:\Users\Edmond\.gradle\caches\transforms-3\6536a52ac3f71fa00116215b0f88bc0a\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+98            android:name="androidx.window.extensions"
+98-->[androidx.window:window:1.0.0-beta04] C:\Users\Edmond\.gradle\caches\transforms-3\6536a52ac3f71fa00116215b0f88bc0a\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+99            android:required="false" />
+99-->[androidx.window:window:1.0.0-beta04] C:\Users\Edmond\.gradle\caches\transforms-3\6536a52ac3f71fa00116215b0f88bc0a\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+100        <uses-library
+100-->[androidx.window:window:1.0.0-beta04] C:\Users\Edmond\.gradle\caches\transforms-3\6536a52ac3f71fa00116215b0f88bc0a\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+101            android:name="androidx.window.sidecar"
+101-->[androidx.window:window:1.0.0-beta04] C:\Users\Edmond\.gradle\caches\transforms-3\6536a52ac3f71fa00116215b0f88bc0a\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+102            android:required="false" />
+102-->[androidx.window:window:1.0.0-beta04] C:\Users\Edmond\.gradle\caches\transforms-3\6536a52ac3f71fa00116215b0f88bc0a\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+103    </application>
+104
+105</manifest>

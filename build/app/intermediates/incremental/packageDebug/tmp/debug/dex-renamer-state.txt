@@ -1,16 +1,16 @@
-#Thu Sep 28 19:41:52 GMT 2023
-base.0=/home/flex/Desktop/quiz_prokit/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
-base.1=/home/flex/Desktop/quiz_prokit/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
-base.2=/home/flex/Desktop/quiz_prokit/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
-base.3=/home/flex/Desktop/quiz_prokit/build/app/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
-base.4=/home/flex/Desktop/quiz_prokit/build/app/intermediates/dex/debug/mergeProjectDexDebug/4/classes.dex
-path.0=classes.dex
-path.1=0/classes.dex
-path.2=0/classes.dex
-path.3=1/classes.dex
+#Fri Oct 06 16:40:43 UTC 2023
 path.4=4/classes.dex
-renamed.0=classes.dex
-renamed.1=classes2.dex
-renamed.2=classes3.dex
+path.3=1/classes.dex
+path.2=0/classes.dex
+path.1=0/classes.dex
+path.0=classes.dex
+base.4=D\:\\Projets\\DTC\\MiabeSchool\\Flutter\\MiabeSchoolParentV2\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
+base.3=D\:\\Projets\\DTC\\MiabeSchool\\Flutter\\MiabeSchoolParentV2\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+base.2=D\:\\Projets\\DTC\\MiabeSchool\\Flutter\\MiabeSchoolParentV2\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.1=D\:\\Projets\\DTC\\MiabeSchool\\Flutter\\MiabeSchoolParentV2\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
+base.0=D\:\\Projets\\DTC\\MiabeSchool\\Flutter\\MiabeSchoolParentV2\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 renamed.3=classes4.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
 renamed.4=classes5.dex

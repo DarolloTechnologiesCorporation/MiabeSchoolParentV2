@@ -2,14 +2,17 @@
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="com.nb.nb_utils" >
 4
-5    <uses-sdk android:minSdkVersion="21" />
-5-->/home/flex/.pub-cache/hosted/pub.dev/nb_utils-6.0.3/android/src/main/AndroidManifest.xml
-6
-7    <uses-permission android:name="android.permission.INTERNET" />
-7-->/home/flex/.pub-cache/hosted/pub.dev/nb_utils-6.0.3/android/src/main/AndroidManifest.xml:4:5-67
-7-->/home/flex/.pub-cache/hosted/pub.dev/nb_utils-6.0.3/android/src/main/AndroidManifest.xml:4:22-64
-8    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-8-->/home/flex/.pub-cache/hosted/pub.dev/nb_utils-6.0.3/android/src/main/AndroidManifest.xml:5:5-79
-8-->/home/flex/.pub-cache/hosted/pub.dev/nb_utils-6.0.3/android/src/main/AndroidManifest.xml:5:22-76
-9
-10</manifest>
+5    <uses-sdk
+6        android:minSdkVersion="21"
+6-->C:\Users\Edmond\AppData\Local\Pub\Cache\hosted\pub.dev\nb_utils-6.0.3\android\src\main\AndroidManifest.xml
+7        android:targetSdkVersion="21" />
+7-->C:\Users\Edmond\AppData\Local\Pub\Cache\hosted\pub.dev\nb_utils-6.0.3\android\src\main\AndroidManifest.xml
+8
+9    <uses-permission android:name="android.permission.INTERNET" />
+9-->C:\Users\Edmond\AppData\Local\Pub\Cache\hosted\pub.dev\nb_utils-6.0.3\android\src\main\AndroidManifest.xml:4:5-67
+9-->C:\Users\Edmond\AppData\Local\Pub\Cache\hosted\pub.dev\nb_utils-6.0.3\android\src\main\AndroidManifest.xml:4:22-64
+10    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+10-->C:\Users\Edmond\AppData\Local\Pub\Cache\hosted\pub.dev\nb_utils-6.0.3\android\src\main\AndroidManifest.xml:5:5-79
+10-->C:\Users\Edmond\AppData\Local\Pub\Cache\hosted\pub.dev\nb_utils-6.0.3\android\src\main\AndroidManifest.xml:5:22-76
+11
+12</manifest>

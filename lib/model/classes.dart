@@ -1,4 +1,4 @@
-import 'package:uuid/v4.dart';
+import 'package:uuid/uuid.dart';
 
 class Team {
   Team({
@@ -83,7 +83,7 @@ class AnneAcademique {
       required this.datedebut,
       required this.datefin,
       required this.etat});
-  UuidV4 id = UuidV4();
+  Uuid id = Uuid();
   final String Libelle;
   final DateTime datedebut;
   final DateTime datefin;
@@ -92,7 +92,7 @@ class AnneAcademique {
 
 class Classe_matiere {
   Classe_matiere({required this.id, required this.coef});
-  UuidV4 id = UuidV4();
+  Uuid id = Uuid();
   final double coef;
 }
 
@@ -102,7 +102,7 @@ class ModelClasse {
       required this.id,
       required this.nomclasse,
       required this.niveau});
-  UuidV4 id = UuidV4();
+  Uuid id = Uuid();
   final String Libelle;
   final String nomclasse;
   final String niveau;
@@ -115,7 +115,7 @@ class ModelEtudiant {
       required this.prenom,
       required this.classe});
 
-  UuidV4 id = UuidV4();
+  Uuid id = Uuid();
   final String nom;
   final String prenom;
   final String classe;
@@ -130,7 +130,7 @@ class evalution {
     required this.Date,
     required this.id,
   });
-  UuidV4 id = UuidV4();
+  Uuid id = Uuid();
   final int Etat;
   final DateTime Date;
   final double Note;
@@ -149,7 +149,7 @@ class Matiere {
       required this.etat,
       required this.id,
       required this.nom_matiere});
-  UuidV4 id = UuidV4();
+  Uuid id = Uuid();
   final String Libelle;
   final String nom_matiere;
   final String etat;
@@ -157,7 +157,7 @@ class Matiere {
 
 class parent {
   parent(this.id, this.user_name, this.password);
-  UuidV4 id = UuidV4();
+  Uuid id = Uuid();
   final String user_name;
   final String password;
 }
@@ -169,7 +169,7 @@ class periodeExamen {
       required this.Datefin,
       required this.Etat,
       required this.Libelle});
-  UuidV4 id = UuidV4();
+  Uuid id = Uuid();
   final String Libelle;
   final DateTime Datedebut;
   final DateTime Datefin;
