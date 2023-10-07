@@ -76,102 +76,108 @@ List<Team> teamsData = [
   ),
 ];
 
-class AnneAcademique {
-  AnneAcademique(
-      {required this.Libelle,
-      required this.id,
-      required this.datedebut,
-      required this.datefin,
-      required this.etat});
-  Uuid id = Uuid();
-  final String Libelle;
-  final DateTime datedebut;
-  final DateTime datefin;
-  final String etat;
-}
+// class AnneAcademique {
+//   AnneAcademique(
+//       {required this.Libelle,
+//       required this.id,
+//       required this.datedebut,
+//       required this.datefin,
+//       required this.etat});
+//   Uuid id = Uuid();
+//   final String Libelle;
+//   final DateTime datedebut;
+//   final DateTime datefin;
+//   final String etat;
+// }
 
-class Classe_matiere {
-  Classe_matiere({required this.id, required this.coef});
-  Uuid id = Uuid();
-  final double coef;
-}
+// class Classe_matiere {
+//   Classe_matiere({required this.id, required this.coef});
+//   Uuid id = Uuid();
+//   final double coef;
+// }
 
-class ModelClasse {
-  ModelClasse(
-      {required this.Libelle,
-      required this.id,
-      required this.nomclasse,
-      required this.niveau});
-  Uuid id = Uuid();
-  final String Libelle;
-  final String nomclasse;
-  final String niveau;
-}
+// class ModelClasse {
+//   ModelClasse(
+//       {required this.Libelle,
+//       required this.id,
+//       required this.nomclasse,
+//       required this.niveau});
+//   Uuid id = Uuid();
+//   final String Libelle;
+//   final String nomclasse;
+//   final String niveau;
+// }
 
-class ModelEtudiant {
-  ModelEtudiant(
-      {required this.id,
-      required this.nom,
-      required this.prenom,
-      required this.classe});
+// class ModelEtudiant {
+//   ModelEtudiant(
+//       {required this.id,
+//       required this.nom,
+//       required this.prenom,
+//       required this.classe});
 
-  Uuid id = Uuid();
-  final String nom;
-  final String prenom;
-  final String classe;
-}
+//   Uuid id = Uuid();
+//   final String nom;
+//   final String prenom;
+//   final String classe;
+// }
 
-class evalution {
-  evalution({
-    required this.Etat,
-    required this.Note,
-    required this.DateAjout,
-    required this.DateModification,
-    required this.Date,
-    required this.id,
-  });
-  Uuid id = Uuid();
-  final int Etat;
-  final DateTime Date;
-  final double Note;
-  final DateTime DateAjout;
-  final DateTime DateModification;
-}
+// class evalution {
+//   evalution({
+//     required this.Etat,
+//     required this.Note,
+//     required this.DateAjout,
+//     required this.DateModification,
+//     required this.Date,
+//     required this.id,
+//   });
+//   Uuid id = Uuid();
+//   final int Etat;
+//   final DateTime Date;
+//   final double Note;
+//   final DateTime DateAjout;
+//   final DateTime DateModification;
+// }
 
-class inscription {
-  inscription({required this.DateInscription});
-  final DateTime DateInscription;
-}
+// class inscription {
+//   inscription({required this.DateInscription});
+//   final DateTime DateInscription;
+// }
 
-class Matiere {
-  Matiere(
-      {required this.Libelle,
-      required this.etat,
-      required this.id,
-      required this.nom_matiere});
-  Uuid id = Uuid();
-  final String Libelle;
-  final String nom_matiere;
-  final String etat;
-}
+// class Matiere {
+//   Matiere(
+//       {required this.Libelle,
+//       required this.etat,
+//       required this.id,
+//       required this.nom_matiere});
+//   Uuid id = Uuid();
+//   final String Libelle;
+//   final String nom_matiere;
+//   final String etat;
+// }
 
-class parent {
-  parent(this.id, this.user_name, this.password);
-  Uuid id = Uuid();
-  final String user_name;
-  final String password;
-}
+// class parent {
+//   parent(this.id, this.user_name, this.password);
+//   Uuid id = Uuid();
+//   final String user_name;
+//   final String password;
+// }
 
-class periodeExamen {
-  periodeExamen(
-      {required this.id,
-      required this.Datedebut,
-      required this.Datefin,
-      required this.Etat,
-      required this.Libelle});
-  Uuid id = Uuid();
-  final String Libelle;
-  final DateTime Datedebut;
-  final DateTime Datefin;
-  final String Etat;
-}
+// class Trimestre {
+//   Trimestre({required this.id, required this.nom});
+//   int id;
+//   final String nom;
+// }
+
+// class periodeExamen {
+//   periodeExamen(
+//       {required this.id,
+//       required this.Datedebut,
+//       required this.Datefin,
+//       required this.Etat,
+//       required this.Libelle});
+//   Uuid id = Uuid();
+//   final String Libelle;
+//   final DateTime Datedebut;
+//   final DateTime Datefin;
+//   final String Etat;
+// }

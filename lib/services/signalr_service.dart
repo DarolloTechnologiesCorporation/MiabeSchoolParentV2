@@ -4,8 +4,10 @@ import 'package:signalr_netcore/ihub_protocol.dart';
 import 'package:signalr_netcore/signalr_client.dart';
 import 'package:logging/logging.dart';
 
+import '../helpers/constant.dart';
+
 class SignalRService {
-  static String _serverUrl = "https://66wtb8qg-7252.eun1.devtunnels.ms/hubs";
+  static String _serverUrl = "${Constant.API_LINK}/hubs";
   static late HubConnection _hubConnection;
   static Future<HubConnection> _getHubConnection() async {
     final logger = Logger("signal R");

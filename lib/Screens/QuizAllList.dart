@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:quiz_prokit/middleware/etudiant_data_middleware.dart';
 import 'package:quiz_prokit/model/QuizModels.dart';
+import 'package:quiz_prokit/model/etudiant.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -20,14 +22,22 @@ class QuizAllList extends StatefulWidget {
 }
 
 class _QuizAllListState extends State<QuizAllList> {
-  late List<NewQuizModel> mListings;
   int selectedPos = 1;
+  EtudiantData etudiantData = EtudiantData();
+  late List<Etudiant> etudiants = [];
 
   @override
   void initState() {
     super.initState();
     selectedPos = 1;
-    mListings = getQuizData();
+    getData();
+  }
+
+  void getData() async {
+    var temp = await etudiantData.getData();
+    setState(() {
+      etudiants = temp.validate();
+    });
   }
 
   Widget quizAll() {
@@ -35,7 +45,7 @@ class _QuizAllListState extends State<QuizAllList> {
       crossAxisCount: 2,
       mainAxisSpacing: 2.0,
       crossAxisSpacing: 2.0,
-      children: mListings.map((e) {
+      children: etudiants.map((e) {
         return Container(
           margin: EdgeInsets.all(8),
           child: Column(
@@ -70,12 +80,12 @@ class _QuizAllListState extends State<QuizAllList> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    text(e.quizName,
+                    text(e.Nom,
                             fontSize: textSizeMedium,
                             maxLine: 2,
                             fontFamily: fontMedium)
                         .paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
-                    text(e.totalQuiz, textColor: quiz_textColorSecondary)
+                    text(e.Salle, textColor: quiz_textColorSecondary)
                         .paddingOnly(left: 16, right: 16, bottom: 8),
                   ],
                 ),
@@ -94,7 +104,7 @@ class _QuizAllListState extends State<QuizAllList> {
       crossAxisCount: 1,
       mainAxisSpacing: 1.0,
       crossAxisSpacing: 4.0,
-      children: mListings.map((e) {
+      children: etudiants.map((e) {
         return Container(
           margin: EdgeInsets.all(8),
           child: Column(
@@ -130,12 +140,12 @@ class _QuizAllListState extends State<QuizAllList> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    text(e.quizName,
+                    text(e.Nom,
                             fontSize: textSizeMedium,
                             maxLine: 2,
                             fontFamily: fontMedium)
                         .paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
-                    text(e.totalQuiz, textColor: quiz_textColorSecondary)
+                    text(e.Salle, textColor: quiz_textColorSecondary)
                         .paddingOnly(left: 16, right: 16, bottom: 16),
                     LinearProgressIndicator(
                       value: 0.5,

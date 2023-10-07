@@ -142,10 +142,14 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizCard.dart';
 import 'package:quiz_prokit/Screens/classe.dart';
+import 'package:quiz_prokit/middleware/periode_data_midleware.dart';
 import 'package:quiz_prokit/model/periode.dart';
+
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizStrings.dart';
 import 'package:quiz_prokit/utils/QuizWidget.dart';
+
+import '../model/classes.dart';
 
 class QuizDetails extends StatefulWidget {
   const QuizDetails({Key? key}) : super(key: key);
@@ -155,25 +159,36 @@ class QuizDetails extends StatefulWidget {
 }
 
 class _QuizDetailsState extends State<QuizDetails> {
-  final List<Trimestre> trimestres = [
-    Trimestre(id: 1, nom: 'Trimestre 1'),
-    Trimestre(id: 2, nom: 'Trimestre 2'),
-    Trimestre(id: 3, nom: 'Trimestre 3'),
-  ];
+  PeriodeData periodeData = PeriodeData();
+  late List<Periode> periodes = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  void getData() async {
+    var data = await periodeData.getData();
+    setState(() {
+      periodes = data.validate();
+    });
+  }
+
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: ListView.builder(
-        itemCount: trimestres.length,
+        itemCount: periodes.length,
         itemBuilder: (context, index) {
-          final trimestre = trimestres[index];
-          return buildCard(trimestre, width, context);
+          final periode = periodes[index];
+          return buildCard(periode, width, context);
         },
       ),
     );
   }
 
-  Widget buildCard(Trimestre trimestre, double width, BuildContext context) {
+  Widget buildCard(Periode periode, double width, BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 16, bottom: 16, right: 16),
       decoration: BoxDecoration(
@@ -214,7 +229,7 @@ class _QuizDetailsState extends State<QuizDetails> {
                           color:
                               quiz_textColorSecondary)), // Remplacez 'Type' par model.type
                   SizedBox(height: 4),
-                  Text(trimestre.nom,
+                  Text(periode.Libelle,
                       style: TextStyle(
                           fontWeight: FontWeight
                               .bold)), // Utilisez le nom du trimestre ici

@@ -20,8 +20,10 @@ class _QuizSignUpState extends State<QuizSignUp> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: text(quiz_lbl_create_account, fontSize: textSizeLargeMedium, fontFamily: fontMedium),
-          leading: Icon(Icons.arrow_back, color: quiz_colorPrimary, size: 24).onTap(
+          title: text(quiz_lbl_create_account,
+              fontSize: textSizeLargeMedium, fontFamily: fontMedium),
+          leading:
+              Icon(Icons.arrow_back, color: quiz_colorPrimary, size: 24).onTap(
             () {
               finish(context);
             },
@@ -43,16 +45,22 @@ class _QuizSignUpState extends State<QuizSignUp> {
                   ).center(),
                   Container(
                     margin: EdgeInsets.all(24.0),
-                    decoration: boxDecoration(bgColor: context.cardColor, showShadow: true, radius: 10),
-                    child: quizEditTextStyle(quiz_hint_your_email, isPassword: false),
+                    decoration: boxDecoration(
+                        bgColor: context.cardColor,
+                        showShadow: true,
+                        radius: 10),
+                    child: quizEditTextStyle(quiz_hint_your_email,
+                        isPassword: false),
                   ),
                   16.height,
                   Container(
                     child: Column(
                       children: <Widget>[
-                        Text(quiz_lbl_already_have_an_account, style: primaryTextStyle()),
+                        Text(quiz_lbl_already_have_an_account,
+                            style: primaryTextStyle()),
                         4.height,
-                        Text(quiz_lbl_sign_in, style: boldTextStyle(color: quiz_colorPrimary)),
+                        Text(quiz_lbl_sign_in,
+                            style: boldTextStyle(color: quiz_colorPrimary)),
                       ],
                     ),
                   ).onTap(

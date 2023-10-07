@@ -7,6 +7,12 @@ class ConnectionService {
   static getConnectionState() async =>
       await (Connectivity().checkConnectivity());
 
+  static isConnected() async {
+    var result = await getConnectionState();
+    if (result != ConnectivityResult.none) return true;
+    return false;
+  }
+
   static void SubscribeForConnectionChange() {
     SignalRService.initPlatformState();
     Connectivity().onConnectivityChanged.listen((result) async {

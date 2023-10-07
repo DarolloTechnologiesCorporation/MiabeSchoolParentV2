@@ -50,6 +50,8 @@ dependencies:
       ref: master
   permission_handler: ^11.0.1
   connectivity_plus: ^4.0.2
+  type_plus: ^2.0.1
+  dot_cast: ^1.2.0
 
 dev_dependencies:
   flutter_test:

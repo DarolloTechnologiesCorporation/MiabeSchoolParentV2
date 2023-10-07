@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizDashboard.dart';
 import 'package:quiz_prokit/Screens/QuizSignUp.dart';
+import 'package:quiz_prokit/managers/periode_manager.dart';
+import 'package:quiz_prokit/model/periode.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizStrings.dart';
 import 'package:quiz_prokit/utils/QuizWidget.dart';
-
+import 'package:uuid/uuid.dart';
 
 class QuizSignIn extends StatefulWidget {
   static String tag = '/QuizSignIn';
@@ -17,6 +18,7 @@ class QuizSignIn extends StatefulWidget {
 }
 
 class _QuizSignInState extends State<QuizSignIn> {
+  var periodeManager = PeriodeManager();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,13 +31,17 @@ class _QuizSignInState extends State<QuizSignIn> {
                 24.height,
                 Text(quiz_title_login, style: boldTextStyle(size: 18)),
                 8.height,
-                Text(quiz_info_login, style: primaryTextStyle(color: quiz_textColorSecondary)).center(),
+                Text(quiz_info_login,
+                        style: primaryTextStyle(color: quiz_textColorSecondary))
+                    .center(),
                 Container(
                   margin: EdgeInsets.all(24.0),
-                  decoration: boxDecoration(bgColor: context.cardColor, showShadow: true, radius: 10),
+                  decoration: boxDecoration(
+                      bgColor: context.cardColor, showShadow: true, radius: 10),
                   child: Column(
                     children: <Widget>[
-                      quizEditTextStyle(quiz_hint_your_email, isPassword: false),
+                      quizEditTextStyle(quiz_hint_your_email,
+                          isPassword: false),
                       quizDivider(),
                       quizEditTextStyle(quiz_hint_your_password),
                     ],
@@ -45,16 +51,23 @@ class _QuizSignInState extends State<QuizSignIn> {
                 Container(
                   child: Column(
                     children: <Widget>[
-                      Text(quiz_lbl_don_t_have_an_account, style: primaryTextStyle()),
+                      Text(quiz_lbl_don_t_have_an_account,
+                          style: primaryTextStyle()),
                       4.height,
-                      Text(quiz_lbl_create_account, style: boldTextStyle(color: quiz_colorPrimary)),
+                      Text(quiz_lbl_create_account,
+                          style: boldTextStyle(color: quiz_colorPrimary)),
                     ],
                   ),
                 ).onTap(
                   () {
                     setState(
                       () {
-                       
+                        var uuid = Uuid();
+                        periodeManager.insertData(Periode(
+                            Id: uuid.v1(),
+                            Libelle: "Libelle",
+                            Datedebut: DateTime.now(),
+                            Datefin: DateTime.now()));
                         QuizSignUp().launch(context);
                       },
                     );

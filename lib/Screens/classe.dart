@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Booking extends StatefulWidget {
@@ -123,68 +122,8 @@ class _BookingState extends State<Booking> {
                           ],
                         ),
                       );
-
-                      /*  title: Row(
-                          children: [
-                            Visibility(
-                              visible: subjects[index] !=
-                                  'Aucune matière disponible',
-                              child: Icon(
-                                Icons.person_pin_circle_sharp,
-                                size: 40.0,
-                              ),
-                            ),
-                            SizedBox(width: 16),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  subjects[index],
-                                  style: TextStyle(
-                                    fontSize: 28.0,
-                                  ),
-                                ),
-                                Text(
-                                  '8:00 AM - 9:45 AM', // Remplacez par l'heure de la matière
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors
-                                        .grey, // Couleur du texte de l'heure
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),*/
                     },
-                  )
-
-                  /*   ListView.builder(
-                  itemCount: subjects.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(
-                        subjects[index],
-                        style: TextStyle(
-                          fontSize: 28.0, // Adjust the font size as needed
-                        ),
-                      ),
-                      trailing: Row(
-                        children: [
-                          Visibility(
-                            visible:
-                                subjects[index] != 'Aucune matière disponible',
-                            child: Icon(
-                              Icons.person_pin_circle_sharp,
-                              size: 50.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),*/
-                  ),
+                  )),
             ),
             BottomAppBar(
               child: Row(

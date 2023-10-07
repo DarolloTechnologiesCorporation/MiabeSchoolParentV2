@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizSignIn.dart';
+import 'package:quiz_prokit/model/base_model.dart';
 import 'package:quiz_prokit/services/background_service.dart';
 import 'package:quiz_prokit/services/connection_service.dart';
 import 'package:quiz_prokit/store/AppStore.dart';
@@ -16,6 +17,7 @@ AppStore appStore = AppStore();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Permission.notification.isDenied.then((value) {
     if (value) {
       Permission.notification.request();
@@ -24,8 +26,7 @@ void main() async {
 
   await initialize(aLocaleLanguageList: languageList());
   await NotificationService.initNotification();
-  await BackgroundService.initializeService();
- 
+  // await BackgroundService.initializeService();
 
   appStore.toggleDarkMode(value: getBoolAsync(isDarkModeOnPref));
 
