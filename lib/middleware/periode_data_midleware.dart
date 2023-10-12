@@ -7,9 +7,9 @@ class PeriodeData {
   PeriodeManager periodeManager = PeriodeManager();
   PeriodeApiService periodeApiService = PeriodeApiService();
 
-  Future<List<Periode>?> getData() async {
+  Future<List<Periode>?> getData(String etudiantId) async {
     if (await ConnectionService.isConnected()) {
-      var data = await periodeApiService.getData();
+      var data = await periodeApiService.getEcolePeriodeData(etudiantId);
       updatePeriode(data);
       return data;
     } else {

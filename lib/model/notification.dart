@@ -1,11 +1,11 @@
-class Notification {
+class NotificationModel {
   String Id;
   String Libelle;
   String Descritpion;
   DateTime DateNotification;
   int IsView;
 
-  Notification(
+  NotificationModel(
       {required this.Id,
       required this.Libelle,
       required this.Descritpion,
@@ -13,7 +13,7 @@ class Notification {
       required this.IsView});
 
   static fromJson(Map json) {
-    return Notification(
+    return NotificationModel(
         Id: json["Id"],
         Libelle: json["Libelle"],
         Descritpion: json["Descritpion"],
@@ -23,51 +23,51 @@ class Notification {
 
   static String getDeleteDefinition() {
     return """
-   DELETE FROM Notification WHERE id = ?
+   DELETE FROM NotificationModel WHERE id = ?
 """;
   }
 
   static String getSelectDefinition() {
     return """
-   SELECT * FROM Notification
+   SELECT * FROM NotificationModel
 """;
   }
 
   static String getInsertDefinition() {
     return """
-    INSERT INTO Notification(Id, Libelle, Descritpion, DateNotification, IsView) VALUES(?, ?, ?, ?, ?)
+    INSERT INTO NotificationModel(Id, Libelle, Descritpion, DateNotification, IsView) VALUES(?, ?, ?, ?, ?)
 """;
   }
 
   static String getTableDefinition() {
-    return """Create table Notification(
+    return """Create table NotificationModel(
       Id Text PRIMARY KEY, Libelle TEXT, Descritpion TEXT, DateNotification TEXT, IsView Integer
     )""";
   }
 
   static String getUpdateDefinition() {
     return """
-      UPDATE Notification SET Libelle = ?, Descritpion = ?, DateNotification = ?, IsView = ? WHERE id = ?
+      UPDATE NotificationModel SET Libelle = ?, Descritpion = ?, DateNotification = ?, IsView = ? WHERE id = ?
 """;
   }
 
-  static Map<String, dynamic> toJson(Notification Notification) {
+  static Map<String, dynamic> toJson(NotificationModel NotificationModel) {
     return {
-      "Id": Notification.Id,
-      "Libelle": Notification.Libelle,
-      "Descritpion": Notification.Descritpion,
-      "DateNotification": Notification.DateNotification,
-      "IsView": Notification.IsView,
+      "Id": NotificationModel.Id,
+      "Libelle": NotificationModel.Libelle,
+      "Descritpion": NotificationModel.Descritpion,
+      "DateNotification": NotificationModel.DateNotification,
+      "IsView": NotificationModel.IsView,
     };
   }
 
-  static List<Object> toSQLData(Notification Notification) {
+  static List<Object> toSQLData(NotificationModel NotificationModel) {
     return [
-      Notification.Id,
-      Notification.Libelle,
-      Notification.Descritpion.toString(),
-      Notification.DateNotification,
-      Notification.IsView
+      NotificationModel.Id,
+      NotificationModel.Libelle,
+      NotificationModel.Descritpion.toString(),
+      NotificationModel.DateNotification,
+      NotificationModel.IsView
     ];
   }
 }

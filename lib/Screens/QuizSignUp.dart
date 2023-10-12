@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizCreatePassword.dart';
+import 'package:quiz_prokit/helpers/constant.dart';
+import 'package:quiz_prokit/helpers/toast_helper.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -15,6 +17,25 @@ class QuizSignUp extends StatefulWidget {
 }
 
 class _QuizSignUpState extends State<QuizSignUp> {
+  check() {
+    if (Constant.registerModel.Nom == "" ||
+        Constant.registerModel.Prenom == "" ||
+        Constant.registerModel.Contact == "") {
+      return false;
+    }
+
+    return true;
+  }
+
+  FToast fToast = FToast();
+
+  @override
+  void initState() {
+    super.initState();
+    // if you want to use context from globally instead of content we need to pass navigatorKey.currentContext!
+    fToast.init(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,18 +60,74 @@ class _QuizSignUpState extends State<QuizSignUp> {
                 children: <Widget>[
                   16.height,
                   Text(
-                    quiz_info_sign_up,
+                    "Remplissez les champs",
                     style: boldTextStyle(color: quiz_textColorSecondary),
                     textAlign: TextAlign.center,
                   ).center(),
+                  Container(
+                      margin: EdgeInsets.all(24.0),
+                      decoration: boxDecoration(
+                          bgColor: context.cardColor,
+                          showShadow: true,
+                          radius: 10),
+                      child: TextFormField(
+                        onChanged: ((value) {
+                          setState(() {
+                            Constant.registerModel.Nom = value;
+                          });
+                        }),
+                        style: primaryTextStyle(),
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.fromLTRB(16, 22, 16, 22),
+                          hintText: "Votre nom",
+                          border: InputBorder.none,
+                          hintStyle: primaryTextStyle(),
+                        ),
+                      )),
                   Container(
                     margin: EdgeInsets.all(24.0),
                     decoration: boxDecoration(
                         bgColor: context.cardColor,
                         showShadow: true,
                         radius: 10),
-                    child: quizEditTextStyle(quiz_hint_your_email,
-                        isPassword: false),
+                    child: TextFormField(
+                      onChanged: ((value) {
+                        setState(() {
+                          Constant.registerModel.Prenom = value;
+                        });
+                      }),
+                      style: primaryTextStyle(),
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(16, 22, 16, 22),
+                        hintText: "Votre prénom",
+                        border: InputBorder.none,
+                        hintStyle: primaryTextStyle(),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(24.0),
+                    decoration: boxDecoration(
+                        bgColor: context.cardColor,
+                        showShadow: true,
+                        radius: 10),
+                    child: TextFormField(
+                      onChanged: ((value) {
+                        setState(() {
+                          Constant.registerModel.Contact = value;
+                        });
+                      }),
+                      style: primaryTextStyle(),
+                      obscureText: false,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(16, 22, 16, 22),
+                        hintText: "Contact",
+                        border: InputBorder.none,
+                        hintStyle: primaryTextStyle(),
+                      ),
+                    ),
                   ),
                   16.height,
                   Container(
@@ -75,7 +152,14 @@ class _QuizSignUpState extends State<QuizSignUp> {
                       textContent: quiz_lbl_continue,
                       onPressed: () {
                         setState(() {
-                          QuizCreatePassword().launch(context);
+                          if (check()) {
+                            ToastHelper.showTost(
+                                "Bien.", ToastType.SUCCESS, context);
+                            QuizCreatePassword().launch(context);
+                          } else {
+                            ToastHelper.showTost("Vérifiez les champs.",
+                                ToastType.ERROR, context);
+                          }
                         });
                       },
                     ),

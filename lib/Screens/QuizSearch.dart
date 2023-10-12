@@ -62,7 +62,7 @@ class _QuizSearchState extends State<QuizSearch> {
           ),
         ).cornerRadiusWithClipRRect(16).onTap(
           () {
-            QuizDetails().launch(context);
+            //QuizDetails().launch(context);
           },
         );
       }).toList(),

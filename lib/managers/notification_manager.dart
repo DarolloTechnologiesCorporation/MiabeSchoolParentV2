@@ -3,40 +3,42 @@ import 'package:sqflite/sqflite.dart';
 
 import '../model/notification.dart';
 
-class NotificationManager {
+class NotificationModelManager {
   Future<Database> initData() async {
     return DatabaseHelper.initData();
   }
 
-  Future<void> insertData(Notification data) async {
+  Future<void> insertData(NotificationModel data) async {
     var database = await initData();
     await database.transaction((txn) async {
-      await txn.rawInsert(
-          Notification.getInsertDefinition(), Notification.toSQLData(data));
+      await txn.rawInsert(NotificationModel.getInsertDefinition(),
+          NotificationModel.toSQLData(data));
     });
     database.close();
   }
 
-  Future<int> updateData(Notification data) async {
+  Future<int> updateData(NotificationModel data) async {
     var database = await initData();
     int count = await database.rawUpdate(
-        Notification.getUpdateDefinition(), Notification.toSQLData(data));
+        NotificationModel.getUpdateDefinition(),
+        NotificationModel.toSQLData(data));
     database.close();
     return count;
   }
 
-  Future<void> deleteData(Notification notification) async {
+  Future<void> deleteData(NotificationModel notification) async {
     var database = await initData();
     await database.rawDelete(
-        Notification.getDeleteDefinition(), [notification.Id.toString()]);
+        NotificationModel.getDeleteDefinition(), [notification.Id.toString()]);
     database.close();
   }
 
-  Future<List<Notification>?> getData() async {
+  Future<List<NotificationModel>?> getData() async {
     var database = await initData();
     List<Map> list =
-        await database.rawQuery(Notification.getSelectDefinition());
+        await database.rawQuery(NotificationModel.getSelectDefinition());
     database.close();
-    return List.generate(list.length, (i) => Notification.fromJson(list[i]));
+    return List.generate(
+        list.length, (i) => NotificationModel.fromJson(list[i]));
   }
 }

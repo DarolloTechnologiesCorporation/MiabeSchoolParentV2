@@ -152,14 +152,19 @@ import 'package:quiz_prokit/utils/QuizWidget.dart';
 import '../model/classes.dart';
 
 class QuizDetails extends StatefulWidget {
-  const QuizDetails({Key? key}) : super(key: key);
+  QuizDetails({Key? key, required this.etudiantId}) : super(key: key);
+  String etudiantId;
 
   @override
-  State<QuizDetails> createState() => _QuizDetailsState();
+  State<QuizDetails> createState() => _QuizDetailsState(etudiantId: etudiantId);
 }
 
 class _QuizDetailsState extends State<QuizDetails> {
   PeriodeData periodeData = PeriodeData();
+  String etudiantId;
+  String? selectedPeriodeId;
+
+  _QuizDetailsState({required this.etudiantId});
   late List<Periode> periodes = [];
 
   @override
@@ -169,7 +174,7 @@ class _QuizDetailsState extends State<QuizDetails> {
   }
 
   void getData() async {
-    var data = await periodeData.getData();
+    var data = await periodeData.getData(etudiantId);
     setState(() {
       periodes = data.validate();
     });
@@ -182,7 +187,14 @@ class _QuizDetailsState extends State<QuizDetails> {
         itemCount: periodes.length,
         itemBuilder: (context, index) {
           final periode = periodes[index];
-          return buildCard(periode, width, context);
+          return GestureDetector(
+            child: buildCard(periode, width, context),
+            onTap: () {
+              setState(() {
+                selectedPeriodeId = periode.Id;
+              });
+            },
+          );
         },
       ),
     );
@@ -243,7 +255,10 @@ class _QuizDetailsState extends State<QuizDetails> {
             child: quizButton(
                 textContent: quiz_lbl_begin,
                 onPressed: () {
-                  QuizCards().launch(context);
+                  QuizCards(
+                    etudiantId: etudiantId,
+                    periodeId: selectedPeriodeId,
+                  ).launch(context);
                 }),
           ),
           quizButton(

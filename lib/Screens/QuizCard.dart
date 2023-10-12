@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:quiz_prokit/helpers/note_herlper.dart';
-import 'package:quiz_prokit/middleware/composition_data_middleware.dart';
-import 'package:quiz_prokit/model/composition.dart';
-import 'package:quiz_prokit/model/matiere.dart';
+import 'package:quiz_prokit/middleware/etudiant_note_data_middleware.dart';
+import 'package:quiz_prokit/model/etudiant_note.dart';
 
 class QuizCards extends StatefulWidget {
-  const QuizCards({Key? key}) : super(key: key);
+  QuizCards({Key? key, required this.etudiantId, required this.periodeId})
+      : super(key: key);
+  String? etudiantId, periodeId;
 
   @override
-  State<QuizCards> createState() => _QuizCardsState();
+  State<QuizCards> createState() =>
+      _QuizCardsState(etudiantId: etudiantId, periodeId: periodeId);
 }
 
 class _QuizCardsState extends State<QuizCards> {
-  late Map<Matiere, Map<Composition, List<String>>> notes = {};
-  var compositionData = new CompositionData();
+  String? etudiantId, periodeId;
+  EtudiantNote? etudiantNote;
 
+  _QuizCardsState({required this.etudiantId, required this.periodeId});
+
+  var etudiantNoteData = new EtudiantNoteData();
+  late List<String> matieres;
+  late List<String> typeCompotisions;
+  late List<String> allNotes;
   @override
   void initState() {
     super.initState();
@@ -23,9 +30,13 @@ class _QuizCardsState extends State<QuizCards> {
   }
 
   getData() async {
-    var temp = await compositionData.getData();
+    etudiantNote = await etudiantNoteData.getOneEtudiantData(
+        etudiantId.validate(), periodeId.validate());
     setState(() {
-      notes = NoteHelper.transformData(temp.validate());
+      matieres = etudiantNote!.Matieres.split(";").validate();
+      typeCompotisions = etudiantNote!.TypeCompositions.split(";").validate();
+      allNotes = etudiantNote!.Notes.split(";").validate();
+      // notes = NoteHelper.transformData(temp.validate());
     });
   }
 
@@ -41,9 +52,9 @@ class _QuizCardsState extends State<QuizCards> {
             child: SingleChildScrollView(
               child: Row(
                 children: [
-                  FixedColumnWidget(matiers: notes.keys.validate()),
+                  FixedColumnWidget(matiers: matieres.validate()),
                   ScrollableColumnWidget(
-                      compositions: notes.values.validate()[0]),
+                      notes: allNotes, typeCompositon: typeCompotisions),
                 ],
               ),
             ),
@@ -55,7 +66,7 @@ class _QuizCardsState extends State<QuizCards> {
 }
 
 class FixedColumnWidget extends StatelessWidget {
-  List<Matiere> matiers;
+  List<String> matiers;
   FixedColumnWidget({required this.matiers});
 
   @override
@@ -78,7 +89,7 @@ class FixedColumnWidget extends StatelessWidget {
         ...matiers.map((matiere) => DataRow(
               cells: [
                 DataCell(Text(
-                  '${matiere.Libelle}',
+                  '${matiere}',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )),
               ],
@@ -89,9 +100,10 @@ class FixedColumnWidget extends StatelessWidget {
 }
 
 class ScrollableColumnWidget extends StatelessWidget {
-  Map<Composition, List<String>> compositions;
+  List<String> typeCompositon;
+  List<String> notes;
 
-  ScrollableColumnWidget({required this.compositions});
+  ScrollableColumnWidget({required this.typeCompositon, required this.notes});
 
   @override
   Widget build(BuildContext context) {
@@ -111,22 +123,21 @@ class ScrollableColumnWidget extends StatelessWidget {
               ),
             ),
             columns: [
-              ...compositions.keys.map(
-                  (compo) => DataColumn(label: Text(compo.TypeComposition))),
+              ...typeCompositon.map((compo) => DataColumn(label: Text(compo))),
             ],
             rows: [
-              ...compositions.values.map((team) => DataRow(
-                    cells: [
-                      ...team.validate().map(
-                            (e) => DataCell(Container(
-                                alignment: AlignmentDirectional.center,
-                                child: Text(
-                                  e.toString(),
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ))),
-                          ),
-                    ],
-                  ))
+              DataRow(
+                cells: [
+                  ...notes.validate().map(
+                        (e) => DataCell(Container(
+                            alignment: AlignmentDirectional.center,
+                            child: Text(
+                              e.toString(),
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ))),
+                      ),
+                ],
+              )
             ]),
       ),
     );

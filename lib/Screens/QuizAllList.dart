@@ -2,9 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:quiz_prokit/Screens/QuizNotification.dart';
 import 'package:quiz_prokit/middleware/etudiant_data_middleware.dart';
+import 'package:quiz_prokit/middleware/notification_data_middleware.dart';
 import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/model/etudiant.dart';
+import 'package:quiz_prokit/model/notification.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -13,6 +16,7 @@ import 'package:quiz_prokit/utils/QuizStrings.dart';
 
 import '../main.dart';
 import 'QuizDetails.dart';
+import 'notification_item.dart';
 
 class QuizAllList extends StatefulWidget {
   static String tag = '/QuizAllList';
@@ -24,7 +28,9 @@ class QuizAllList extends StatefulWidget {
 class _QuizAllListState extends State<QuizAllList> {
   int selectedPos = 1;
   EtudiantData etudiantData = EtudiantData();
+  NotificationModelData notificationModelData = NotificationModelData();
   late List<Etudiant> etudiants = [];
+  late List<NotificationModel> notificationModels = [];
 
   @override
   void initState() {
@@ -35,8 +41,10 @@ class _QuizAllListState extends State<QuizAllList> {
 
   void getData() async {
     var temp = await etudiantData.getData();
+    // var not = await notificationModelData.getData();
     setState(() {
       etudiants = temp.validate();
+      //notificationModels = not.validate();
     });
   }
 
@@ -54,10 +62,11 @@ class _QuizAllListState extends State<QuizAllList> {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16.0),
                       topRight: Radius.circular(16.0)),
-                  child: Icon(
-                    Icons
-                        .person, // Utilisez Icons.person pour représenter une personne
-                    size: 100.0, // Taille de l'icône
+                  child: Image.asset(
+                    e.Sexe == "MASCULIN"
+                        ? "assets/image/profile_boy.png"
+                        : "assets/image/profile_girl.png", // Utilisez Icons.person pour représenter une personne
+                    height: 70.0, // Taille de l'icône
                     //  color: Colors.black, // Couleur de l'icône
                   )
 
@@ -80,7 +89,7 @@ class _QuizAllListState extends State<QuizAllList> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    text(e.Nom,
+                    text("${e.Nom} ${e.Prenom}",
                             fontSize: textSizeMedium,
                             maxLine: 2,
                             fontFamily: fontMedium)
@@ -93,75 +102,26 @@ class _QuizAllListState extends State<QuizAllList> {
             ],
           ),
         ).cornerRadiusWithClipRRect(16).onTap(() {
-          QuizDetails().launch(context);
+          QuizDetails(etudiantId: e.Id).launch(context);
         });
       }).toList(),
     );
   }
 
   Widget quizCompleted() {
-    return StaggeredGrid.count(
-      crossAxisCount: 1,
-      mainAxisSpacing: 1.0,
-      crossAxisSpacing: 4.0,
-      children: etudiants.map((e) {
-        return Container(
-          margin: EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(16.0),
-                      topRight: Radius.circular(16.0)),
-                  child: Icon(
-                    Icons
-                        .person, // Utilisez Icons.person pour représenter une personne
-                    size: 48.0, // Taille de l'icône
-                    color: Colors.blue, // Couleur de l'icône
-                  )
-
-                  /* CachedNetworkImage(
-                  placeholder: placeholderWidgetFn() as Widget Function(
-                      BuildContext, String)?,
-                  imageUrl: e.quizImage,
-                  height: context.width() * 0.4,
-                  width: MediaQuery.of(context).size.width / 0.25,
-                  fit: BoxFit.cover,
-                ),*/
-                  ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(16.0),
-                      bottomRight: Radius.circular(16.0)),
-                  color: context.cardColor,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    text(e.Nom,
-                            fontSize: textSizeMedium,
-                            maxLine: 2,
-                            fontFamily: fontMedium)
-                        .paddingOnly(top: 8, left: 16, right: 16, bottom: 8),
-                    text(e.Salle, textColor: quiz_textColorSecondary)
-                        .paddingOnly(left: 16, right: 16, bottom: 16),
-                    LinearProgressIndicator(
-                      value: 0.5,
-                      backgroundColor: textSecondaryColor.withOpacity(0.2),
-                      valueColor: AlwaysStoppedAnimation<Color>(quiz_green),
-                    ).paddingOnly(left: 16, right: 16, bottom: 16),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ).cornerRadiusWithClipRRect(16).onTap(() {
-          QuizDetails().launch(context);
-        });
-      }).toList(),
-      //gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.60, mainAxisSpacing: 16, crossAxisSpacing: 16),
+    return Container(
+      padding: EdgeInsets.all(12),
+      height: context.height(),
+      // color: appStore.isDarkModeOn ? scaffoldDarkColor : gray.withOpacity(0.1),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ...notificationModels.map((e) => NotificationItem(model: e)),
+          ],
+        ),
+      ),
     );
   }
 
@@ -250,7 +210,7 @@ class _QuizAllListState extends State<QuizAllList> {
                                       : Colors.transparent),
                             ),
                             child: text(
-                              quiz_lbl_Completed,
+                              "Informations",
                               fontSize: textSizeMedium,
                               isCentered: true,
                               fontFamily: fontMedium,

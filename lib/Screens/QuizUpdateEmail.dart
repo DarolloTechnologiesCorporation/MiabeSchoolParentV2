@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:quiz_prokit/helpers/constant.dart';
+import 'package:quiz_prokit/helpers/toast_helper.dart';
+import 'package:quiz_prokit/model/authModel.dart';
+import 'package:quiz_prokit/services/api/authService.dart';
+import 'package:quiz_prokit/services/api/preference_service.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
@@ -14,11 +19,48 @@ class QuizUpdateEmail extends StatefulWidget {
 }
 
 class _QuizUpdateEmailState extends State<QuizUpdateEmail> {
+  String pseudo = "";
+
+  getData() async {
+    var pseudoTemp = await PreferenceService.GetParendPseudo();
+    setState(() {
+      pseudo = pseudoTemp.validate();
+    });
+  }
+
+  @override
+  initState() {
+    super.initState();
+    getData();
+  }
+
+  sendData() async {
+    if (pseudo != "") {
+      try {
+        var model = UpdateInfoDTO();
+        var rep = await AuthService().updateInfo(model);
+        if (rep) {
+          ToastHelper.showTost(
+              "Modifcation effectué avec succès.", ToastType.SUCCESS, context);
+        } else {
+          ToastHelper.showTost(
+              "Erreur lors de la modifcation.", ToastType.ERROR, context);
+        }
+      } catch (e) {
+        ToastHelper.showTost(
+            "Erreur lors de la modifcation.", ToastType.ERROR, context);
+      }
+    } else {
+      ToastHelper.showTost("Vérifez le champ.", ToastType.ERROR, context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: text(quiz_lbl_Update_email, fontSize: textSizeNormal, fontFamily: fontMedium),
+        title: text("Modifiez votre pseudo",
+            fontSize: 17.0, fontFamily: fontMedium),
         iconTheme: IconThemeData(color: quiz_colorPrimary, size: 24),
         centerTitle: true,
         elevation: 0.0,
@@ -29,33 +71,46 @@ class _QuizUpdateEmailState extends State<QuizUpdateEmail> {
             height: MediaQuery.of(context).size.height,
             child: Column(
               children: <Widget>[
-                16.height,
-                text(quiz_info_Update_email, textColor: quiz_textColorSecondary, isLongText: true, isCentered: true).center(),
                 Container(
                   margin: EdgeInsets.all(24.0),
-                  decoration: boxDecoration(bgColor: context.cardColor, showShadow: true, radius: 10),
                   child: Column(
                     children: <Widget>[
-                      quizEditTextStyle(quiz_hint_your_email, isPassword: false),
+                      Container(
+                        margin: EdgeInsets.all(24.0),
+                        decoration: boxDecoration(
+                            bgColor: context.cardColor,
+                            showShadow: true,
+                            radius: 10),
+                        child: TextFormField(
+                          initialValue: pseudo,
+                          onChanged: (value) {
+                            setState(() {
+                              pseudo = value;
+                            });
+                          },
+                          style: primaryTextStyle(),
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(16, 22, 16, 22),
+                            border: InputBorder.none,
+                            hintStyle: primaryTextStyle(),
+                            hintText: "Votre pseudo",
+                            labelStyle: primaryTextStyle(
+                                size: 20, color: quiz_textColorPrimary),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                8.height,
-                Text(quiz_lbl_email_Verify, style: secondaryTextStyle()).onTap(
-                  () {
-                    finish(context);
-                  },
-                ),
-                50.height,
                 Container(
-                  margin: EdgeInsets.all(24.0),
+                  margin: EdgeInsets.all(50.0),
                   child: quizButton(
-                    textContent: quiz_lbl_save,
+                    textContent: "Modifier",
                     onPressed: () {
                       setState(
                         () {
-                          finish(context);
-                          toasty(context, quiz_Successfully_Email_Updated);
+                          sendData();
                         },
                       );
                     },

@@ -20,17 +20,24 @@ class RegisterDTO {
       required this.Password});
 }
 
+class UpdateInfoDTO {
+  String? Nom;
+  String? Prenom;
+  String? Contact;
+  String? Pseudo;
+  String? Password;
+  String? OldPassword;
+  UpdateInfoDTO();
+}
+
 class ParentAddEleveDTO {
   String EleveCode;
-  String EcoleCode;
   String EleveNom;
   String ElevePrenom;
-  DateTime EleveNaissance;
 
-  ParentAddEleveDTO(
-      {required this.EcoleCode,
-      required this.EleveCode,
-      required this.EleveNom,
-      required this.ElevePrenom,
-      required this.EleveNaissance});
+  ParentAddEleveDTO({
+    required this.EleveCode,
+    required this.EleveNom,
+    required this.ElevePrenom,
+  });
 }

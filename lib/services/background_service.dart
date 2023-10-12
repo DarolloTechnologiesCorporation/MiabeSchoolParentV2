@@ -8,10 +8,7 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:quiz_prokit/services/connection_service.dart';
-import 'package:quiz_prokit/services/signalr_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'notification_service.dart';
 
 class BackgroundService {
   static bool isServiceRunning = false;
@@ -55,7 +52,7 @@ class BackgroundService {
         autoStart: true,
         isForegroundMode: true,
         notificationChannelId: 'my_foreground',
-        initialNotificationTitle: 'Miabe school service',
+        initialNotificationTitle: 'Miabe Parent service',
         initialNotificationContent: 'Démarée',
         foregroundServiceNotificationId: 888,
       ),
@@ -120,7 +117,7 @@ class BackgroundService {
               service.setForegroundNotificationInfo(
                 title: "Miabe school",
                 content:
-                    "Miabe school tourne en arrière plan ${DateTime.now()}.",
+                    "Miabe Parent tourne en arrière plan ${DateTime.now()}.",
               );
               isServiceNotificationShwon = true;
             }

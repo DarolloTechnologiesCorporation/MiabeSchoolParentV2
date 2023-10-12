@@ -1,4 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:quiz_prokit/services/api/preference_service.dart';
 import 'package:quiz_prokit/services/background_service.dart';
 import 'package:quiz_prokit/services/notification_service.dart';
 import 'package:quiz_prokit/services/signalr_service.dart';
@@ -13,7 +15,8 @@ class ConnectionService {
     return false;
   }
 
-  static void SubscribeForConnectionChange() {
+  static void SubscribeForConnectionChange() async {
+    var connexion = await PreferenceService.getConnexionPreference();
     SignalRService.initPlatformState();
     Connectivity().onConnectivityChanged.listen((result) async {
       if (result != ConnectivityResult.none) {
@@ -22,8 +25,10 @@ class ConnectionService {
         }
       } else {
         SignalRService.stopHub();
-        await NotificationService.showNotification(
-            title: "Miabe school", body: "Vous êtes déconnecté de l'école.");
+        if (connexion.validate()) {
+          await NotificationService.showNotification(
+              title: "Miabe school", body: "Vous êtes déconnecté de l'école.");
+        }
       }
     });
   }

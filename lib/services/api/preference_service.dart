@@ -31,12 +31,96 @@ class PreferenceService {
   static Future<String?> GetParendId() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.reload();
-    return (await preferences.getString(Constant.ParendIdKey));
+    return (await preferences.getString(Constant.ParentIdKey));
+  }
+
+  static Future<String?> GetParendName() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    return (await preferences.getString(Constant.ParentNameKey));
   }
 
   static void SetParendId(String data) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.reload();
-    await preferences.setString(Constant.ParendIdKey, data);
+    await preferences.setString(Constant.ParentNameKey, data);
+  }
+
+  static void SetParendParentName(String data) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    await preferences.setString(Constant.ParentIdKey, data);
+  }
+
+  static void SetParentParentNom(String data) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    await preferences.setString(Constant.ParentNomKey, data);
+  }
+
+  static void SetParentParentPrenom(String data) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    await preferences.setString(Constant.ParentPrenomKey, data);
+  }
+
+  static void SetParentParentContact(String data) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    await preferences.setString(Constant.ParentContactKey, data);
+  }
+
+  static Future<String?> GetParendPseudo() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    return (await preferences.getString(Constant.ParentPseudoKey));
+  }
+
+  static void SetParendParentPseudo(String data) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    await preferences.setString(Constant.ParentIdKey, data);
+  }
+
+  static void SetNotificationPreference(bool data) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    await preferences.setBool(Constant.NotificationKey, data);
+  }
+
+  static void SetConnexionPreference(bool data) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    await preferences.setBool(Constant.ConnexionKey, data);
+  }
+
+  static Future<bool?> getNotificationPreference() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    return (await preferences.getBool(Constant.NotificationKey));
+  }
+
+  static Future<bool?> getConnexionPreference() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    return (await preferences.getBool(Constant.ConnexionKey));
+  }
+
+  static Future<String?> getParentNom() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    return (await preferences.getString(Constant.ParentNomKey));
+  }
+
+  static Future<String?> getParentPrenom() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    return (await preferences.getString(Constant.ParentPrenomKey));
+  }
+
+  static Future<String?> getParentContact() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    return (await preferences.getString(Constant.ParentContactKey));
   }
 }

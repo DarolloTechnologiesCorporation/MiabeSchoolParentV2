@@ -41,7 +41,7 @@ class _QuizListingState extends State<QuizListing> {
           onTap: () {
             setState(
               () {
-                QuizDetails().launch(context);
+               // QuizDetails().launch(context);
               },
             );
           },
@@ -118,7 +118,7 @@ class _QuizListingState extends State<QuizListing> {
             ],
           ),
         ).cornerRadiusWithClipRRect(16).onTap(() {
-          QuizDetails().launch(context);
+          //QuizDetails().launch(context);
         });
       }).toList(),
 

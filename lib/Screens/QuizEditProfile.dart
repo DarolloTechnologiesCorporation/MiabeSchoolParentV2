@@ -1,13 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:quiz_prokit/helpers/constant.dart';
+import 'package:quiz_prokit/helpers/toast_helper.dart';
+import 'package:quiz_prokit/model/authModel.dart';
+import 'package:quiz_prokit/services/api/authService.dart';
+import 'package:quiz_prokit/services/api/preference_service.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
-import 'package:quiz_prokit/utils/QuizImages.dart';
-import 'package:quiz_prokit/utils/QuizStrings.dart';
 import 'package:quiz_prokit/utils/QuizWidget.dart';
-
 
 class QuizEditProfile extends StatefulWidget {
   static String tag = '/QuizEditProfile';
@@ -17,6 +19,50 @@ class QuizEditProfile extends StatefulWidget {
 }
 
 class _QuizEditProfileState extends State<QuizEditProfile> {
+  String nom = "", prenom = "", contact = "";
+
+  getData() async {
+    var nomTemp = await PreferenceService.getParentNom();
+    var prenomTemp = await PreferenceService.getParentPrenom();
+    var contactTemp = await PreferenceService.getParentContact();
+
+    setState(() {
+      nom = nomTemp.validate();
+      prenom = prenomTemp.validate();
+      contact = contactTemp.validate();
+    });
+  }
+
+  @override
+  initState() {
+    super.initState();
+    getData();
+  }
+
+  sendData() async {
+    if (nom == "" || prenom == "" || contact == "") {
+      ToastHelper.showTost("Vérifiez les champs.", ToastType.ERROR, context);
+    } else {
+      try {
+        var updateModel = UpdateInfoDTO();
+        updateModel.Nom = nom;
+        updateModel.Password = prenom;
+        updateModel.Contact = contact;
+        var rep = await AuthService().updateInfo(updateModel);
+        if (rep) {
+          ToastHelper.showTost("Informations modifiées avec succès.",
+              ToastType.SUCCESS, context);
+        } else {
+          ToastHelper.showTost(
+              "Erreur lors de la modification.", ToastType.ERROR, context);
+        }
+      } catch (e) {
+        ToastHelper.showTost(
+            "Erreur lors de la modification.", ToastType.ERROR, context);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // ignore: non_constant_identifier_names
@@ -29,17 +75,13 @@ class _QuizEditProfileState extends State<QuizEditProfile> {
               Container(
                 height: 150,
                 width: 150,
-                decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: quiz_white, width: 4)),
-                child: CircleAvatar(backgroundImage: CachedNetworkImageProvider(quiz_img_People2), radius: MediaQuery.of(context).size.width / 8.5),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: quiz_white, width: 4)),
+                child: CircleAvatar(
+                    backgroundImage: AssetImage("assets/image/etudicon.png"),
+                    radius: MediaQuery.of(context).size.width / 8.5),
               ),
-              Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: quiz_white, width: 2), color: context.cardColor),
-                child: Icon(Icons.edit, size: 20),
-              ).paddingOnly(right: 16, top: 16).onTap(() {
-                print("Edit profile");
-              })
             ],
           ).paddingOnly(top: 8),
         ],
@@ -48,8 +90,10 @@ class _QuizEditProfileState extends State<QuizEditProfile> {
 
     return Scaffold(
       appBar: AppBar(
-        title: text(Quiz_lbl_Edit_Profile, fontSize: textSizeNormal, fontFamily: fontMedium),
-        leading: Icon(Icons.arrow_back, color: quiz_colorPrimary, size: 30).onTap(() {
+        title: text("Modification de vos informations",
+            fontSize: 17.0, fontFamily: fontMedium),
+        leading: Icon(Icons.arrow_back, color: quiz_colorPrimary, size: 30)
+            .onTap(() {
           Navigator.of(context).pop();
         }),
         centerTitle: true,
@@ -66,26 +110,88 @@ class _QuizEditProfileState extends State<QuizEditProfile> {
               SizedBox(height: 20),
               Container(
                 margin: EdgeInsets.all(24.0),
-                decoration: boxDecoration(bgColor: context.cardColor, showShadow: true, radius: 10),
                 child: Column(
                   children: <Widget>[
-                    quizEditTextStyle(quiz_hint_First_name, isPassword: false),
+                    Container(
+                        margin: EdgeInsets.all(24.0),
+                        decoration: boxDecoration(
+                            bgColor: context.cardColor,
+                            showShadow: true,
+                            radius: 10),
+                        child: TextFormField(
+                          initialValue: nom,
+                          onChanged: ((value) {
+                            setState(() {
+                              nom = value;
+                            });
+                          }),
+                          style: primaryTextStyle(),
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(16, 22, 16, 22),
+                            hintText: "Votre nom",
+                            border: InputBorder.none,
+                            hintStyle: primaryTextStyle(),
+                          ),
+                        )),
+                    Container(
+                      margin: EdgeInsets.all(24.0),
+                      decoration: boxDecoration(
+                          bgColor: context.cardColor,
+                          showShadow: true,
+                          radius: 10),
+                      child: TextFormField(
+                        initialValue: prenom,
+                        onChanged: ((value) {
+                          setState(() {
+                            prenom = value;
+                          });
+                        }),
+                        style: primaryTextStyle(),
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.fromLTRB(16, 22, 16, 22),
+                          hintText: "Votre prénom",
+                          border: InputBorder.none,
+                          hintStyle: primaryTextStyle(),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(24.0),
+                      decoration: boxDecoration(
+                          bgColor: context.cardColor,
+                          showShadow: true,
+                          radius: 10),
+                      child: TextFormField(
+                        initialValue: contact,
+                        onChanged: ((value) {
+                          setState(() {
+                            contact = value;
+                          });
+                        }),
+                        style: primaryTextStyle(),
+                        obscureText: false,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.fromLTRB(16, 22, 16, 22),
+                          hintText: "Contact",
+                          border: InputBorder.none,
+                          hintStyle: primaryTextStyle(),
+                        ),
+                      ),
+                    ),
                     quizDivider(),
-                    quizEditTextStyle(quiz_hint_Last_name, isPassword: false),
-                    quizDivider(),
-                    quizEditTextStyle(quiz_hint_Mobile_Number, isPassword: false),
                   ],
                 ),
               ),
               SizedBox(height: 20),
               Container(
-                margin: EdgeInsets.all(24.0),
+                margin: EdgeInsets.all(50.0),
                 child: quizButton(
-                  textContent: quiz_Save_Profile,
+                  textContent: "Valider",
                   onPressed: () {
                     setState(() {
-                      Navigator.of(context).pop();
-                      toasty(context, quiz_Successfully_Save_Profile);
+                      sendData();
                     });
                   },
                 ),

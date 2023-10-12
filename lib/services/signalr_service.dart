@@ -1,4 +1,8 @@
 import 'dart:async';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:quiz_prokit/managers/notification_manager.dart';
+import 'package:quiz_prokit/model/notification.dart';
+import 'package:quiz_prokit/services/api/preference_service.dart';
 import 'package:quiz_prokit/services/notification_service.dart';
 import 'package:signalr_netcore/ihub_protocol.dart';
 import 'package:signalr_netcore/signalr_client.dart';
@@ -40,15 +44,25 @@ class SignalRService {
   }
 
   static Future<void> initPlatformState() async {
+    var connexion = await PreferenceService.getConnexionPreference();
+    var notification = await PreferenceService.getNotificationPreference();
     final connection = await _getHubConnection();
     if (connection.state == HubConnectionState.Connected) {
-      connection.keepAliveIntervalInMilliseconds = 10 * 60 * 60 * 1000;
-      await NotificationService.showNotification(
-          title: "Miabe school", body: "Vous êtes connecté à l'école.");
-      connection.on('DbChange', (message) async {
+      if (connexion.validate()) {
+        connection.keepAliveIntervalInMilliseconds = 10 * 60 * 60 * 1000;
         await NotificationService.showNotification(
-            title: "Miabe school", body: message.toString());
+            title: "Miabe Parent", body: "Vous êtes connecté à l'école.");
+      }
+      connection.on(SignalRMessage.Notification.toString(), (message) async {
+        if (notification.validate()) {
+          var info = message as NotificationModel;
+          await NotificationService.showNotification(
+              title: info.Libelle, body: info.Descritpion.toString());
+          await NotificationModelManager().insertData(info);
+        }
       });
     }
   }
 }
+
+enum SignalRMessage { Notification }

@@ -638,6 +638,18 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "rive",
+      "rootUri": "file:///C:/Users/Edmond/AppData/Local/Pub/Cache/hosted/pub.dev/rive-0.11.17",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "rive_common",
+      "rootUri": "file:///C:/Users/Edmond/AppData/Local/Pub/Cache/hosted/pub.dev/rive_common-0.2.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "rxdart",
       "rootUri": "file:///C:/Users/Edmond/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.27.7",
       "packageUri": "lib/",
@@ -974,7 +986,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2023-10-07T06:15:29.472478Z",
+  "generated": "2023-10-11T05:41:32.239656Z",
   "generator": "pub",
-  "generatorVersion": "3.1.0"
+  "generatorVersion": "3.1.3"
 }

@@ -93,7 +93,7 @@ class _QuizHomeState extends State<QuizHome> {
                 physics: ScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) => NewQuiz(mListings[index], index).onTap(
                   () {
-                    QuizDetails().launch(context);
+                  //  QuizDetails(etudiantId: ,).launch(context);
                   },
                 ),
               ),

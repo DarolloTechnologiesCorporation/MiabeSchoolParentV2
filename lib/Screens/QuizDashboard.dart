@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizAllList.dart';
+import 'package:quiz_prokit/Screens/QuizHelpCenter.dart';
+import 'package:quiz_prokit/Screens/QuizMobileVerify.dart';
+import 'package:quiz_prokit/Screens/QuizNotification.dart';
 import 'package:quiz_prokit/Screens/QuizProfile.dart';
+import 'package:quiz_prokit/Screens/QuizResult.dart';
+import 'package:quiz_prokit/Screens/quizEmailRequest.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizImages.dart';
 
@@ -97,11 +102,25 @@ class _QuizDashboardState extends State<QuizDashboard> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 //    quizItem(0, quiz_ic_homes, "Home"),
-                quizItem(0, quiz_ic_quiz, "Quiz"),
+                quizItem(0, quiz_ic_quiz, "Accueil"),
                 quizItem(1, quiz_ic_user, "Profile"),
               ],
             )),
       ),
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        splashColor: Colors.lightBlueAccent,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        onPressed: (() {
+          QuizMobileVerify().launch(context);
+        }),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

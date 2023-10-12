@@ -19,7 +19,8 @@ class _QuizVerificationState extends State<QuizVerification> {
     return Scaffold(
       appBar: AppBar(
         title: Text(quiz_title_Verification, style: boldTextStyle()),
-        leading: Icon(Icons.arrow_back, color: quiz_colorPrimary, size: 24).onTap(
+        leading:
+            Icon(Icons.arrow_back, color: quiz_colorPrimary, size: 24).onTap(
           () {
             finish(context);
           },
@@ -40,14 +41,17 @@ class _QuizVerificationState extends State<QuizVerification> {
                   textAlign: TextAlign.center,
                 ).center(),
                 16.height,
-                PinEntryTextField(fields: 4, fontSize: textSizeLargeMedium).center(),
+                PinEntryTextField(fields: 4, fontSize: textSizeLargeMedium)
+                    .center(),
                 24.height,
                 Container(
                   child: Column(
                     children: <Widget>[
-                      Text(quiz_lbl_did_not_receive_code, style: primaryTextStyle()),
+                      Text(quiz_lbl_did_not_receive_code,
+                          style: primaryTextStyle()),
                       4.height,
-                      Text(quiz_lbl_Resend, style: boldTextStyle(color: quiz_colorPrimary)),
+                      Text(quiz_lbl_Resend,
+                          style: boldTextStyle(color: quiz_colorPrimary)),
                     ],
                   ),
                 ).onTap(() {}),
@@ -59,7 +63,7 @@ class _QuizVerificationState extends State<QuizVerification> {
                     onPressed: () {
                       setState(
                         () {
-                          QuizNotification().launch(context);
+                          NotificationScreen().launch(context);
                         },
                       );
                     },

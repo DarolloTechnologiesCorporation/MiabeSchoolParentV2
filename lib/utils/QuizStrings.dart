@@ -1,26 +1,26 @@
-const quiz_lbl_continue = "CONTINUE";
-const quiz_hint_your_password = "Your Password";
-const quiz_hint_your_email = "Your Email";
-const quiz_info_login = "Enter your login details to \n  access your account";
-const quiz_info_sign_up = "Start by entering your email \n address below.";
-const quiz_lbl_forgot = "Forgot";
-const quiz_lbl_show = "Show";
-const quiz_lbl_allow = "Allow";
-const quiz_title_login = "Log In";
-const quiz_lbl_don_t_have_an_account = "Don\'t have an account?";
-const quiz_lbl_create_account = "CREATE ACCOUNT";
-const quiz_title_Create_account = "Create Account";
+const quiz_lbl_continue = "Continuer";
+const quiz_hint_your_password = "Votre mot de passe";
+const quiz_hint_your_email = "Votre mail";
+const quiz_info_login = "Saisissez vos informations \n pour vous connecter.";
+const quiz_info_sign_up = "Saissez votre mail.";
+const quiz_lbl_forgot = "Oublié";
+const quiz_lbl_show = "Voir";
+const quiz_lbl_allow = "Accorder";
+const quiz_title_login = "Connexion";
+const quiz_lbl_don_t_have_an_account = "Pas de compte?";
+const quiz_lbl_create_account = "CREER UN COMPTE";
+const quiz_title_Create_account = "Créer un compte";
 const quiz_info_create_password =
-    "Your password must have at \n least one symbol &amp; 8 or \n more characters.";
-const quiz_lbl_already_have_an_account = "Already have an account?";
-const quiz_lbl_sign_in = "Sign In";
-const quiz_lbl_skip = "SKIP";
-const quiz_lbl_let_started = "Let's Get Started";
+    "Votre mot de passe doit avoir \n \t 8 caractères ou plus.";
+const quiz_lbl_already_have_an_account = "Vous avez déjà un compte?";
+const quiz_lbl_sign_in = "Se connecter";
+const quiz_lbl_skip = "PASSER";
+const quiz_lbl_let_started = "Commençons";
 const quiz_info_let_started =
     "Enter your mobile number to \n enable 2- step verification ";
-const quiz_hint_Mobile_Number = "Mobile Number";
-const quiz_lbl_Create_password = "Create Password";
-const quiz_title_Verification = "Verification";
+const quiz_hint_Mobile_Number = "Numéro de téléphone";
+const quiz_lbl_Create_password = "Créer un mot de passe";
+const quiz_title_Verification = "Vérification";
 const quiz_lbl_did_not_receive_code = "I didn't recevice a code";
 const quiz_lbl_Resend = "Resend";
 const quiz_info_Verification =
@@ -55,7 +55,7 @@ const quiz_lbl_study_reminder = "Study Reminder";
 const quiz_lbl_help = "Help Center";
 const quiz_lbl_privacy = "Privacy & Terms";
 const quiz_lbl_contact_us = "Contact Us";
-const quiz_lbl_logout = "Log out";
+const quiz_lbl_logout = "Déconnexion";
 
 const quiz_lbl_Antonio_Perez = "Antonio Perez";
 const quiz_lbl_Xp = "1,53,675 XP";

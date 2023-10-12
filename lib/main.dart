@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizSignIn.dart';
-import 'package:quiz_prokit/model/base_model.dart';
-import 'package:quiz_prokit/services/background_service.dart';
-import 'package:quiz_prokit/services/connection_service.dart';
+import 'package:quiz_prokit/services/miabe_school_service.dart';
 import 'package:quiz_prokit/store/AppStore.dart';
 import 'package:quiz_prokit/utils/AppTheme.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
 import 'package:quiz_prokit/utils/QuizDataGenerator.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import 'services/notification_service.dart';
 
 AppStore appStore = AppStore();
 
@@ -25,8 +21,8 @@ void main() async {
   });
 
   await initialize(aLocaleLanguageList: languageList());
-  await NotificationService.initNotification();
-  // await BackgroundService.initializeService();
+
+  MiabeSchoolService.initMiabeSchoolService();
 
   appStore.toggleDarkMode(value: getBoolAsync(isDarkModeOnPref));
 
@@ -44,7 +40,8 @@ class MyApp extends StatelessWidget {
     return Observer(
       builder: (_) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Online Quiz${!isMobile ? ' ${platformName()}' : ''}',
+        // title: 'Online Quiz${!isMobile ? ' ${platformName()}' : ''}',
+        title: 'Miabe Parent',
         home: QuizSignIn(),
         theme: !appStore.isDarkModeOn
             ? AppThemeData.lightTheme

@@ -6,10 +6,10 @@ import 'package:quiz_prokit/Screens/QuizEditProfile.dart';
 import 'package:quiz_prokit/Screens/QuizHelpCenter.dart';
 import 'package:quiz_prokit/Screens/QuizUpdateEmail.dart';
 import 'package:quiz_prokit/main.dart';
+import 'package:quiz_prokit/services/api/preference_service.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
 import 'package:quiz_prokit/utils/QuizStrings.dart';
-
 
 class QuizSettings extends StatefulWidget {
   static String tag = '/QuizSetting';
@@ -19,12 +19,109 @@ class QuizSettings extends StatefulWidget {
 }
 
 class _QuizSettingsState extends State<QuizSettings> {
+  String name = "";
+  String pseudo = "";
+
+  @override
+  initState() {
+    super.initState();
+
+    getData();
+  }
+
+  getData() async {
+    var temp = await PreferenceService.GetParendName();
+    var temp1 = await PreferenceService.GetParendPseudo();
+    var connexion = await PreferenceService.getConnexionPreference();
+    var notification = await PreferenceService.getNotificationPreference();
+    setState(() {
+      name = temp.validate();
+      pseudo = temp1.validate();
+      notifyConnection = connexion.validate();
+      notifyInfo = notification.validate();
+    });
+  }
+
+  Widget quizSettingOptionPattern1(var settingIcon, var heading, var info) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: quiz_color_setting),
+                width: 45,
+                height: 45,
+                padding: EdgeInsets.all(4),
+                child: Icon(settingIcon, color: quiz_white),
+              ),
+              SizedBox(width: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(heading),
+                  Text(info,
+                      style: primaryTextStyle(
+                          color: quiz_textColorSecondary, size: 14)),
+                ],
+              ),
+            ],
+          ),
+          Icon(
+            Icons.keyboard_arrow_right,
+            color: quiz_icon_color,
+          )
+        ],
+      ),
+    );
+  }
+
+  bool notifyInfo = false;
+  bool notifyConnection = false;
+
+  Widget quizSettingOptionPattern3(var icon, var heading) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: quiz_color_setting),
+                width: 45,
+                height: 45,
+                padding: EdgeInsets.all(4),
+                child: Icon(
+                  icon,
+                  color: quiz_white,
+                ),
+              ),
+              SizedBox(
+                width: 16,
+              ),
+              Text(heading),
+            ],
+          ),
+          Icon(
+            Icons.keyboard_arrow_right,
+            color: quiz_icon_color,
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          quiz_lbl_setting,
+          "Paramètres",
           style: primaryTextStyle(size: 18, fontFamily: fontMedium),
         ),
         iconTheme: IconThemeData(color: quiz_colorPrimary, size: 24),
@@ -41,22 +138,31 @@ class _QuizSettingsState extends State<QuizSettings> {
                   children: <Widget>[
                     SizedBox(height: 8),
                     Container(
-                      decoration: BoxDecoration(color: context.cardColor, borderRadius: BorderRadius.circular(8), boxShadow: defaultBoxShadow()),
+                      decoration: BoxDecoration(
+                          color: context.cardColor,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: defaultBoxShadow()),
                       margin: EdgeInsets.only(bottom: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          quizSettingOptionPattern1(Icons.person, quiz_lbl_edit_profile, quiz_username).onTap(() {
+                          quizSettingOptionPattern1(
+                                  Icons.info, "Changer vos informations", name)
+                              .onTap(() {
                             setState(() {
                               QuizEditProfile().launch(context);
                             });
                           }),
-                          quizSettingOptionPattern1(Icons.email, quiz_lbl_email, quiz_email).onTap(() {
+                          quizSettingOptionPattern1(Icons.perm_identity,
+                                  "Changer votre pseudo", pseudo)
+                              .onTap(() {
                             setState(() {
                               QuizUpdateEmail().launch(context);
                             });
                           }),
-                          quizSettingOptionPattern1(Icons.vpn_key, quiz_lbl_password, quiz_sub_info_password).onTap(() {
+                          quizSettingOptionPattern3(
+                                  Icons.vpn_key, "Changer votre mot de passe")
+                              .onTap(() {
                             setState(() {
                               QuizChangePassword().launch(context);
                             });
@@ -69,16 +175,22 @@ class _QuizSettingsState extends State<QuizSettings> {
                                 Row(
                                   children: <Widget>[
                                     Container(
-                                      decoration: BoxDecoration(shape: BoxShape.circle, color: quiz_color_setting),
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: quiz_color_setting),
                                       width: 45,
                                       height: 45,
                                       padding: EdgeInsets.all(4),
-                                      child: Image.asset('images/ic_theme.png', height: 24, width: 24, color: quiz_white).paddingOnly(left: 6),
+                                      child: Image.asset('images/ic_theme.png',
+                                              height: 24,
+                                              width: 24,
+                                              color: quiz_white)
+                                          .paddingOnly(left: 6),
                                     ),
                                     SizedBox(
                                       width: 16,
                                     ),
-                                    Text('Dark Mode'),
+                                    Text('Mode sombre'),
                                   ],
                                 ),
                                 Switch(
@@ -95,41 +207,106 @@ class _QuizSettingsState extends State<QuizSettings> {
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(color: context.cardColor, borderRadius: BorderRadius.circular(8), boxShadow: defaultBoxShadow()),
+                      decoration: BoxDecoration(
+                          color: context.cardColor,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: defaultBoxShadow()),
                       margin: EdgeInsets.only(bottom: 20),
                       child: Column(
                         children: <Widget>[
-                          quizSettingOptionPattern2(Icons.star, quiz_lbl_scoreboard),
-                          quizSettingOptionPattern2(Icons.add_box, quiz_lbl_new_course),
-                          quizSettingOptionPattern2(Icons.notifications, quiz_lbl_study_reminder),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: quiz_color_setting),
+                                      width: 45,
+                                      height: 45,
+                                      padding: EdgeInsets.all(4),
+                                      child: Icon(
+                                        Icons.notifications,
+                                        color: quiz_white,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 16,
+                                    ),
+                                    Text(
+                                        "Me tenir informer des \npartages d'informations"),
+                                  ],
+                                ),
+                                Switch(
+                                  value: notifyInfo,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      notifyInfo = value;
+                                    });
+                                  },
+                                  activeTrackColor: quiz_colorPrimary,
+                                  activeColor: quiz_view_color,
+                                )
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: quiz_color_setting),
+                                      width: 45,
+                                      height: 45,
+                                      padding: EdgeInsets.all(4),
+                                      child: Icon(
+                                        Icons.notifications_on,
+                                        color: quiz_white,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 16,
+                                    ),
+                                    Text(
+                                        "Me tenir informer de \nl'état de ma connexion"),
+                                  ],
+                                ),
+                                Switch(
+                                  value: notifyConnection,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      notifyConnection = value;
+                                    });
+                                  },
+                                  activeTrackColor: quiz_colorPrimary,
+                                  activeColor: quiz_view_color,
+                                )
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
                     Container(
-                      decoration: BoxDecoration(color: context.cardColor, borderRadius: BorderRadius.circular(8), boxShadow: defaultBoxShadow()),
-                      margin: EdgeInsets.only(bottom: 20),
-                      child: Column(
-                        children: <Widget>[
-                          quizSettingOptionPattern3(Icons.help, quiz_lbl_help).onTap(() {
-                            setState(() {
-                              QuizHelpCenter().launch(context);
-                            });
-                          }),
-                          quizSettingOptionPattern3(Icons.security, quiz_lbl_privacy),
-                          quizSettingOptionPattern3(Icons.chat_bubble, quiz_lbl_contact_us).onTap(() {
-                            setState(() {
-                              QuizContactUs().launch(context);
-                            });
-                          }),
-                        ],
-                      ),
-                    ),
-                    Text(
-                      quiz_lbl_logout,
-                      style: boldTextStyle(color: quiz_colorPrimary, size: 18),
-                    ).paddingAll(16).onTap(() {
-                      finish(context);
-                    })
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.2),
+                      child: Text(
+                        quiz_lbl_logout,
+                        textAlign: TextAlign.end,
+                        style:
+                            boldTextStyle(color: quiz_colorPrimary, size: 18),
+                      ).paddingAll(16).onTap(() {
+                        finish(context);
+                      }),
+                    )
                   ],
                 ),
               ),
@@ -139,112 +316,4 @@ class _QuizSettingsState extends State<QuizSettings> {
       ),
     );
   }
-}
-
-Widget quizSettingOptionPattern1(var settingIcon, var heading, var info) {
-  return Padding(
-    padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(shape: BoxShape.circle, color: quiz_color_setting),
-              width: 45,
-              height: 45,
-              padding: EdgeInsets.all(4),
-              child: Icon(settingIcon, color: quiz_white),
-            ),
-            SizedBox(width: 16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(heading),
-                Text(info, style: primaryTextStyle(color: quiz_textColorSecondary, size: 14)),
-              ],
-            ),
-          ],
-        ),
-        Icon(
-          Icons.keyboard_arrow_right,
-          color: quiz_icon_color,
-        )
-      ],
-    ),
-  );
-}
-
-Widget quizSettingOptionPattern2(var icon, var heading) {
-  bool isSwitched1 = false;
-
-  return Padding(
-    padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(shape: BoxShape.circle, color: quiz_color_setting),
-              width: 45,
-              height: 45,
-              padding: EdgeInsets.all(4),
-              child: Icon(
-                icon,
-                color: quiz_white,
-              ),
-            ),
-            SizedBox(
-              width: 16,
-            ),
-            Text(heading),
-          ],
-        ),
-        Switch(
-          value: isSwitched1,
-          onChanged: (value) {
-            // setState(() {
-            isSwitched1 = value;
-            //  });
-          },
-          activeTrackColor: quiz_colorPrimary,
-          activeColor: quiz_view_color,
-        )
-      ],
-    ),
-  );
-}
-
-Widget quizSettingOptionPattern3(var icon, var heading) {
-  return Padding(
-    padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(shape: BoxShape.circle, color: quiz_color_setting),
-              width: 45,
-              height: 45,
-              padding: EdgeInsets.all(4),
-              child: Icon(
-                icon,
-                color: quiz_white,
-              ),
-            ),
-            SizedBox(
-              width: 16,
-            ),
-            Text(heading),
-          ],
-        ),
-        Icon(
-          Icons.keyboard_arrow_right,
-          color: quiz_icon_color,
-        )
-      ],
-    ),
-  );
 }
