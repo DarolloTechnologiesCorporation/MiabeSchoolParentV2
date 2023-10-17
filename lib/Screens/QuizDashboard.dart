@@ -7,6 +7,7 @@ import 'package:quiz_prokit/Screens/QuizMobileVerify.dart';
 import 'package:quiz_prokit/Screens/QuizNotification.dart';
 import 'package:quiz_prokit/Screens/QuizProfile.dart';
 import 'package:quiz_prokit/Screens/QuizResult.dart';
+import 'package:quiz_prokit/Screens/paiement_list.dart';
 import 'package:quiz_prokit/Screens/quizEmailRequest.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizImages.dart';
@@ -26,6 +27,7 @@ class _QuizDashboardState extends State<QuizDashboard> {
   var pages = [
     // QuizHome(),
     QuizAllList(),
+    OPDasboardScreen(),
     QuizProfile(),
   ];
 
@@ -103,24 +105,11 @@ class _QuizDashboardState extends State<QuizDashboard> {
               children: <Widget>[
                 //    quizItem(0, quiz_ic_homes, "Home"),
                 quizItem(0, quiz_ic_quiz, "Accueil"),
-                quizItem(1, quiz_ic_user, "Profile"),
+                quizItem(1, quiz_ic_user, "Paiement"),
+                quizItem(2, quiz_ic_user, "Profile"),
               ],
             )),
       ),
-      floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        splashColor: Colors.lightBlueAccent,
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        onPressed: (() {
-          QuizMobileVerify().launch(context);
-        }),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

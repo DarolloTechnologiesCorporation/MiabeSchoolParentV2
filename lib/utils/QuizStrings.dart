@@ -87,4 +87,4 @@ const quiz_Successfully_Email_Updated = "Successfully Email Updated";
 const quiz_Password_Updated = "Password Updated";
 const quiz_Thank_you_Successfully_Added = "Thank you Successfully Added";
 const quiz_Submitted = "Submitted";
-const lienCalender = "Calendrier";
+const lienCalender = "Contrôles";

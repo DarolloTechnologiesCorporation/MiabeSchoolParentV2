@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:quiz_prokit/Screens/paiement.dart';
 import 'package:quiz_prokit/model/etudiant_note.dart';
 import 'package:type_plus/type_plus.dart';
 
@@ -67,5 +68,18 @@ class ApiService {
       return EtudiantNote.fromJson(temp);
     }
     return null;
+  }
+
+  Future<bool> addPaiement() async {
+    var client = http.Client();
+    String link = "${Constant.API_LINK}/parents/data/paiements/add";
+    var response = await client.post(
+      Uri.parse(link),
+      body: jsonEncode({}),
+      headers: {
+        'Authorization': 'Bearer ${Constant.TOKEN}',
+      },
+    );
+    return response.statusCode == 200;
   }
 }

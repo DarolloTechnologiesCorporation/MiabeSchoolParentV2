@@ -29,6 +29,18 @@ class Etudiant {
     );
   }
 
+  static fromSQL(Map json) {
+    return Etudiant(
+      Id: json["EtudiantId"].toString(),
+      Nom: json["Nom"].toString(),
+      Prenom: json["Prenom"].toString(),
+      Matricule: json["Matricule"].toString(),
+      EcoleMatricule: json["EcoleMatricule"].toString(),
+      Salle: json["Classe"].toString(),
+      Sexe: json["Sexe"].toString(),
+    );
+  }
+
   static String getDeleteDefinition() {
     return """
    DELETE FROM Etudiant WHERE id = ?
@@ -73,6 +85,18 @@ class Etudiant {
   }
 
   static List<Object> toSQLData(Etudiant Etudiant) {
+    return [
+      Etudiant.Id,
+      Etudiant.Nom,
+      Etudiant.Prenom.toString(),
+      Etudiant.Salle.toString(),
+      Etudiant.EcoleMatricule,
+      Etudiant.Matricule,
+      Etudiant.Sexe,
+    ];
+  }
+
+  static List<Object> toUpdateSQLData(Etudiant Etudiant) {
     return [
       Etudiant.Nom,
       Etudiant.Prenom.toString(),

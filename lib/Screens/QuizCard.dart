@@ -20,9 +20,9 @@ class _QuizCardsState extends State<QuizCards> {
   _QuizCardsState({required this.etudiantId, required this.periodeId});
 
   var etudiantNoteData = new EtudiantNoteData();
-  late List<String> matieres;
-  late List<String> typeCompotisions;
-  late List<String> allNotes;
+  List<String> matieres = [];
+  List<String> typeCompotisions = [];
+  List<String> allNotes = [];
   @override
   void initState() {
     super.initState();

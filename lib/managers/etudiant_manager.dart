@@ -19,8 +19,17 @@ class EtudiantManager {
 
   Future<int> updateData(Etudiant data) async {
     var database = await initData();
-    int count = await database.rawUpdate(
-        Etudiant.getUpdateDefinition(), Etudiant.toSQLData(data));
+    int? nbr = Sqflite.firstIntValue(await database
+        .rawQuery("SELECT COUNT(*) FROM Etudiant where Id = '${data.Id}' "));
+    int count = 0;
+    if (nbr != null) {
+      if (nbr > 0) {
+        count = await database.rawUpdate(
+            Etudiant.getUpdateDefinition(), Etudiant.toUpdateSQLData(data));
+      } else {
+        await insertData(data);
+      }
+    }
     database.close();
     return count;
   }
@@ -36,6 +45,6 @@ class EtudiantManager {
     var database = await initData();
     List<Map> list = await database.rawQuery(Etudiant.getSelectDefinition());
     database.close();
-    return List.generate(list.length, (i) => Etudiant.fromJson(list[i]));
+    return List.generate(list.length, (i) => Etudiant.fromSQL(list[i]));
   }
 }

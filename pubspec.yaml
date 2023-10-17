@@ -43,6 +43,9 @@ dependencies:
   flutter_background_service: ^5.0.1
   flutter_background_service_android: ^6.0.1
   shared_preferences: ^2.2.1
+  ussd_advanced: ^1.1.0
+  sim_data: ^0.0.2
+  flutter_sms_inbox: ^1.0.3
 
   signalr_netcore:
     git:
@@ -54,6 +57,10 @@ dependencies:
   dot_cast: ^1.2.0
   fluttertoast: ^8.2.2
   rive: ^0.11.17
+  carousel_slider: ^4.2.1
+  dots_indicator: ^3.0.0
+  expansion_tile_card: ^3.0.0
+  flutter_fast_forms: ^12.0.0
 
 dev_dependencies:
   flutter_test:

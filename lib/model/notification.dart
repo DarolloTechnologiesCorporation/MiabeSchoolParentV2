@@ -14,6 +14,15 @@ class NotificationModel {
 
   static fromJson(Map json) {
     return NotificationModel(
+        Id: json["id"],
+        Libelle: json["libelle"],
+        Descritpion: json["descritpion"],
+        DateNotification: json["dateNotification"],
+        IsView: json["isView"] as int);
+  }
+
+  static fromSQL(Map json) {
+    return NotificationModel(
         Id: json["Id"],
         Libelle: json["Libelle"],
         Descritpion: json["Descritpion"],
@@ -68,6 +77,16 @@ class NotificationModel {
       NotificationModel.Descritpion.toString(),
       NotificationModel.DateNotification,
       NotificationModel.IsView
+    ];
+  }
+
+  static List<Object> toUpdateSQLData(NotificationModel NotificationModel) {
+    return [
+      NotificationModel.Libelle,
+      NotificationModel.Descritpion.toString(),
+      NotificationModel.DateNotification,
+      NotificationModel.IsView,
+      NotificationModel.Id,
     ];
   }
 }

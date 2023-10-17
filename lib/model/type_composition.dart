@@ -11,6 +11,14 @@ class TypeComposition {
 
   static fromJson(Map json) {
     return TypeComposition(
+      Id: json["id"],
+      Libelle: json["libelle"],
+      PeriodeId: json["periodeId"],
+    );
+  }
+
+  static fromSQL(Map json) {
+    return TypeComposition(
       Id: json["Id"],
       Libelle: json["Libelle"],
       PeriodeId: json["PeriodeId"],
@@ -60,6 +68,14 @@ class TypeComposition {
       TypeComposition.Id,
       TypeComposition.Libelle,
       TypeComposition.PeriodeId.toString(),
+    ];
+  }
+
+  static List<Object> toUpdateSQLData(TypeComposition TypeComposition) {
+    return [
+      TypeComposition.Libelle,
+      TypeComposition.PeriodeId.toString(),
+      TypeComposition.Id,
     ];
   }
 }

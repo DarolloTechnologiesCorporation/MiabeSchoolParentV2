@@ -15,11 +15,20 @@ class EtudiantNote {
 
   static fromJson(Map json) {
     return EtudiantNote(
-        EtudiantId: json["EtudiantId"],
-        PeriodId: json["PeriodId"],
-        Matieres: json["Matieres"],
-        Notes: json["Notes"],
-        TypeCompositions: json["TypeCompositions"]);
+        EtudiantId: json["etudiantId"],
+        PeriodId: json["periodId"],
+        Matieres: json["matieres"],
+        Notes: json["notes"],
+        TypeCompositions: json["typeCompositions"]);
+  }
+
+  static fromSQL(Map json) {
+    return EtudiantNote(
+        EtudiantId: json["EtudiantId"].toString(),
+        PeriodId: json["PeriodId"].toString(),
+        Matieres: json["Matieres"].toString(),
+        Notes: json["Notes"].toString(),
+        TypeCompositions: json["TypeCompositions"].toString());
   }
 
   static String getDeleteDefinition() {
@@ -71,6 +80,17 @@ class EtudiantNote {
       EtudiantNote.TypeCompositions,
       EtudiantNote.EtudiantId,
       EtudiantNote.PeriodId
+    ];
+  }
+
+  static List<Object> toUpdateSQLData(EtudiantNote EtudiantNote) {
+    return [
+      EtudiantNote.Matieres,
+      EtudiantNote.Notes.toString(),
+      EtudiantNote.TypeCompositions,
+      EtudiantNote.EtudiantId,
+      EtudiantNote.PeriodId,
+      EtudiantNote.Id
     ];
   }
 }

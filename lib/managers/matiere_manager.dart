@@ -19,8 +19,20 @@ class MatiereManager {
 
   Future<int> updateData(Matiere data) async {
     var database = await initData();
-    int count = await database.rawUpdate(
-        Matiere.getUpdateDefinition(), Matiere.toSQLData(data));
+
+    int? nbr = Sqflite.firstIntValue(await database
+        .rawQuery("SELECT COUNT(*) FROM Matiere where Id = '${data.Id}' "));
+
+    int count = 0;
+    if (nbr != null) {
+      if (nbr > 0) {
+        count = await database.rawUpdate(
+            Matiere.getUpdateDefinition(), Matiere.toUpdateSQLData(data));
+      } else {
+        await insertData(data);
+      }
+    }
+
     database.close();
     return count;
   }
@@ -36,6 +48,6 @@ class MatiereManager {
     var database = await initData();
     List<Map> list = await database.rawQuery(Matiere.getSelectDefinition());
     database.close();
-    return List.generate(list.length, (i) => Matiere.fromJson(list[i]));
+    return List.generate(list.length, (i) => Matiere.fromSQL(list[i]));
   }
 }

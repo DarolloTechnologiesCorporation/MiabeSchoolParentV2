@@ -2,16 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:quiz_prokit/Screens/QuizNotification.dart';
+import 'package:quiz_prokit/Screens/QuizMobileVerify.dart';
+import 'package:quiz_prokit/Screens/indicator.dart';
 import 'package:quiz_prokit/middleware/etudiant_data_middleware.dart';
 import 'package:quiz_prokit/middleware/notification_data_middleware.dart';
-import 'package:quiz_prokit/model/QuizModels.dart';
 import 'package:quiz_prokit/model/etudiant.dart';
 import 'package:quiz_prokit/model/notification.dart';
 import 'package:quiz_prokit/utils/AppWidget.dart';
 import 'package:quiz_prokit/utils/QuizColors.dart';
 import 'package:quiz_prokit/utils/QuizConstant.dart';
-import 'package:quiz_prokit/utils/QuizDataGenerator.dart';
 import 'package:quiz_prokit/utils/QuizStrings.dart';
 
 import '../main.dart';
@@ -27,11 +26,11 @@ class QuizAllList extends StatefulWidget {
 
 class _QuizAllListState extends State<QuizAllList> {
   int selectedPos = 1;
-  EtudiantData etudiantData = EtudiantData();
   NotificationModelData notificationModelData = NotificationModelData();
+  EtudiantData etudiantData = EtudiantData();
   late List<Etudiant> etudiants = [];
   late List<NotificationModel> notificationModels = [];
-
+  bool isBusy = false;
   @override
   void initState() {
     super.initState();
@@ -40,10 +39,14 @@ class _QuizAllListState extends State<QuizAllList> {
   }
 
   void getData() async {
+    setState(() {
+      isBusy = true;
+    });
     var temp = await etudiantData.getData();
     // var not = await notificationModelData.getData();
     setState(() {
       etudiants = temp.validate();
+      isBusy = false;
       //notificationModels = not.validate();
     });
   }
@@ -131,113 +134,160 @@ class _QuizAllListState extends State<QuizAllList> {
 
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 40),
-                Container(
-                  width: width,
-                  decoration: boxDecoration(
-                      radius: spacing_middle,
-                      bgColor: context.cardColor,
-                      showShadow: false),
-                  margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
-                  child: Row(
-                    children: <Widget>[
-                      Flexible(
-                        child: GestureDetector(
-                          onTap: () {
-                            selectedPos = 1;
-                            setState(() {});
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(8.0),
+        body: Stack(
+          children: [
+            !isBusy
+                ? SingleChildScrollView(
+                    child: Container(
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(height: 40),
+                          Container(
                             width: width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(spacing_middle),
-                                  bottomLeft: Radius.circular(spacing_middle)),
-                              color: selectedPos == 1
-                                  ? appStore.isDarkModeOn
-                                      ? scaffoldDarkColor
-                                      : quiz_white
-                                  : Colors.transparent,
-                              border: Border.all(
-                                  color: selectedPos == 1
-                                      ? quiz_white
-                                      : Colors.transparent),
-                            ),
-                            child: text(
-                              quiz_lbl_All,
-                              fontSize: textSizeMedium,
-                              isCentered: true,
-                              fontFamily: fontMedium,
-                              textColor: selectedPos == 1
-                                  ? appStore.isDarkModeOn
-                                      ? white
-                                      : quiz_textColorPrimary
-                                  : quiz_textColorSecondary,
+                            decoration: boxDecoration(
+                                radius: spacing_middle,
+                                bgColor: context.cardColor,
+                                showShadow: false),
+                            margin: EdgeInsets.fromLTRB(16, 0, 16, 16),
+                            child: Row(
+                              children: <Widget>[
+                                Flexible(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      selectedPos = 1;
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(8.0),
+                                      width: width,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                            topLeft:
+                                                Radius.circular(spacing_middle),
+                                            bottomLeft: Radius.circular(
+                                                spacing_middle)),
+                                        color: selectedPos == 1
+                                            ? appStore.isDarkModeOn
+                                                ? scaffoldDarkColor
+                                                : quiz_white
+                                            : Colors.transparent,
+                                        border: Border.all(
+                                            color: selectedPos == 1
+                                                ? quiz_white
+                                                : Colors.transparent),
+                                      ),
+                                      child: text(
+                                        quiz_lbl_All,
+                                        fontSize: textSizeMedium,
+                                        isCentered: true,
+                                        fontFamily: fontMedium,
+                                        textColor: selectedPos == 1
+                                            ? appStore.isDarkModeOn
+                                                ? white
+                                                : quiz_textColorPrimary
+                                            : quiz_textColorSecondary,
+                                      ),
+                                    ),
+                                  ),
+                                  flex: 1,
+                                ),
+                                Container(
+                                        height: 40,
+                                        width: 1,
+                                        color: quiz_light_gray)
+                                    .center(),
+                                Flexible(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        selectedPos = 2;
+                                      });
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(8.0),
+                                      width: width,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                            topRight:
+                                                Radius.circular(spacing_middle),
+                                            bottomRight: Radius.circular(
+                                                spacing_middle)),
+                                        color: selectedPos == 2
+                                            ? appStore.isDarkModeOn
+                                                ? scaffoldDarkColor
+                                                : quiz_white
+                                            : Colors.transparent,
+                                        border: Border.all(
+                                            color: selectedPos == 2
+                                                ? quiz_white
+                                                : Colors.transparent),
+                                      ),
+                                      child: text(
+                                        "Informations",
+                                        fontSize: textSizeMedium,
+                                        isCentered: true,
+                                        fontFamily: fontMedium,
+                                        textColor: selectedPos == 2
+                                            ? appStore.isDarkModeOn
+                                                ? white
+                                                : quiz_textColorPrimary
+                                            : quiz_textColorSecondary,
+                                      ),
+                                    ),
+                                  ),
+                                  flex: 1,
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        flex: 1,
-                      ),
-                      Container(height: 40, width: 1, color: quiz_light_gray)
-                          .center(),
-                      Flexible(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedPos = 2;
-                            });
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(8.0),
-                            width: width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(spacing_middle),
-                                  bottomRight: Radius.circular(spacing_middle)),
-                              color: selectedPos == 2
-                                  ? appStore.isDarkModeOn
-                                      ? scaffoldDarkColor
-                                      : quiz_white
-                                  : Colors.transparent,
-                              border: Border.all(
-                                  color: selectedPos == 2
-                                      ? quiz_white
-                                      : Colors.transparent),
-                            ),
-                            child: text(
-                              "Informations",
-                              fontSize: textSizeMedium,
-                              isCentered: true,
-                              fontFamily: fontMedium,
-                              textColor: selectedPos == 2
-                                  ? appStore.isDarkModeOn
-                                      ? white
-                                      : quiz_textColorPrimary
-                                  : quiz_textColorSecondary,
+                          SingleChildScrollView(
+                            physics: ScrollPhysics(),
+                            child: Container(
+                              margin: EdgeInsets.only(right: 8, left: 8),
+                              child: selectedPos == 1
+                                  ? etudiants.length > 0
+                                      ? quizAll()
+                                      : Container(
+                                          height: context.width(),
+                                          child: Center(
+                                            child: Text(
+                                                "Auncun enfant disponible pour le moment."),
+                                          ),
+                                        )
+                                  : notificationModels.length > 0
+                                      ? quizCompleted()
+                                      : Container(
+                                          height: context.width(),
+                                          child: Center(
+                                            child: Text(
+                                                "Aucune information disponible pour le moment."),
+                                          ),
+                                        ),
                             ),
                           ),
-                        ),
-                        flex: 1,
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                SingleChildScrollView(
-                  physics: ScrollPhysics(),
-                  child: Container(
-                    margin: EdgeInsets.only(right: 8, left: 8),
-                    child: selectedPos == 1 ? quizAll() : quizCompleted(),
-                  ),
-                ),
-              ],
-            ),
-          ),
+                    ),
+                  )
+                : MiabeSchoolIndicatorView()
+          ],
         ),
+        floatingActionButton: selectedPos == 1
+            ? FloatingActionButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                splashColor: Colors.lightBlueAccent,
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                onPressed: (() {
+                  QuizMobileVerify().launch(context);
+                }),
+              )
+            : null,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );
   }

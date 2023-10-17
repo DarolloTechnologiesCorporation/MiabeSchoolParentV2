@@ -10,11 +10,20 @@ class EtudiantNoteData {
 
   Future<EtudiantNote?> getOneEtudiantData(
       String etudiantId, String periodeId) async {
-    if (await ConnectionService.isConnected()) {
-      var data = await etudiantNoteApiService.getData(etudiantId, periodeId);
-      updateEtudiantNote(data);
-      return data;
-    } else {
+    try {
+      if (await ConnectionService.isConnected()) {
+        var data = await etudiantNoteApiService.getData(etudiantId, periodeId);
+        if (data != null) {
+          updateEtudiantNote(data);
+          return data;
+        }
+        return await etudiantNoteManager.getOndeEtudiantData(
+            etudiantId, periodeId);
+      } else {
+        return await etudiantNoteManager.getOndeEtudiantData(
+            etudiantId, periodeId);
+      }
+    } catch (e) {
       return await etudiantNoteManager.getOndeEtudiantData(
           etudiantId, periodeId);
     }

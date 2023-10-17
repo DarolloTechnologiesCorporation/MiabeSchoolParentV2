@@ -19,8 +19,19 @@ class PeriodeManager {
 
   Future<int> updateData(Periode data) async {
     var database = await initData();
-    int count = await database.rawUpdate(
-        Periode.getUpdateDefinition(), Periode.toSQLData(data));
+    int? nbr = Sqflite.firstIntValue(await database
+        .rawQuery("SELECT COUNT(*) FROM Periode where Id = '${data.Id}' "));
+    int count = 0;
+    if (nbr != null) {
+      if (nbr > 0) {
+        count = await database.rawUpdate(
+            Periode.getUpdateDefinition(), Periode.toUpdateSQLData(data));
+      } else {
+        await database.close();
+        await insertData(data);
+      }
+    }
+
     database.close();
     return count;
   }
@@ -37,5 +48,25 @@ class PeriodeManager {
     List<Map> list = await database.rawQuery(Periode.getSelectDefinition());
     database.close();
     return List.generate(list.length, (i) => Periode.fromJson(list[i]));
+  }
+
+  Future<List<Periode>?> getEcolePeriodeData(String etudiantId) async {
+    var database = await initData();
+    List<Map> maps = await database.query("Periode",
+        columns: [
+          "Libelle",
+          "EtudiantId",
+          "Datedebut",
+          "Datefin",
+        ],
+        where: 'EtudiantId = ?',
+        whereArgs: [etudiantId]);
+
+    List<Periode>? periode;
+    database.close();
+    if (maps.length > 0) {
+      periode = List.generate(maps.length, (i) => Periode.fromSQL(maps[i]));
+    }
+    return periode;
   }
 }

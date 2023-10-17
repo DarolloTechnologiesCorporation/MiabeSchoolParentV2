@@ -62,7 +62,11 @@ class _QuizSettingsState extends State<QuizSettings> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(heading),
+                  Text(
+                    heading,
+                    softWrap: true,
+                    style: TextStyle(),
+                  ),
                   Text(info,
                       style: primaryTextStyle(
                           color: quiz_textColorSecondary, size: 14)),

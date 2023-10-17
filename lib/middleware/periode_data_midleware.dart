@@ -8,12 +8,19 @@ class PeriodeData {
   PeriodeApiService periodeApiService = PeriodeApiService();
 
   Future<List<Periode>?> getData(String etudiantId) async {
-    if (await ConnectionService.isConnected()) {
-      var data = await periodeApiService.getEcolePeriodeData(etudiantId);
-      updatePeriode(data);
-      return data;
-    } else {
-      return await periodeManager.getData();
+    try {
+      if (await ConnectionService.isConnected()) {
+        var data = await periodeApiService.getEcolePeriodeData(etudiantId);
+        if (data != null) {
+          updatePeriode(data);
+          return data;
+        }
+        return await periodeManager.getEcolePeriodeData(etudiantId);
+      } else {
+        return await periodeManager.getEcolePeriodeData(etudiantId);
+      }
+    } catch (e) {
+      return await periodeManager.getEcolePeriodeData(etudiantId);
     }
   }
 

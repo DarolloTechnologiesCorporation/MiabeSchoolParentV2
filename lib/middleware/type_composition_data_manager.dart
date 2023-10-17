@@ -9,11 +9,18 @@ class TypeCompositionData {
       TypeCompositionApiService();
 
   Future<List<TypeComposition>?> getData() async {
-    if (await ConnectionService.isConnected()) {
-      var data = await typeCompositionApiService.getData();
-      updateTypeComposition(data);
-      return data;
-    } else {
+    try {
+      if (await ConnectionService.isConnected()) {
+        var data = await typeCompositionApiService.getData();
+        if (data != null) {
+          updateTypeComposition(data);
+          return data;
+        }
+        return await typeCompositionManager.getData();
+      } else {
+        return await typeCompositionManager.getData();
+      }
+    } catch (e) {
       return await typeCompositionManager.getData();
     }
   }

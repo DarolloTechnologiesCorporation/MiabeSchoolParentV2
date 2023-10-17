@@ -11,6 +11,14 @@ class Matiere {
 
   static fromJson(Map json) {
     return Matiere(
+      Id: json["id"],
+      Libelle: json["libelle"],
+      CodeMatiere: json["codeMatiere"],
+    );
+  }
+
+  static fromSQL(Map json) {
+    return Matiere(
       Id: json["Id"],
       Libelle: json["Libelle"],
       CodeMatiere: json["CodeMatiere"],
@@ -60,6 +68,14 @@ class Matiere {
       Matiere.Id,
       Matiere.Libelle,
       Matiere.CodeMatiere.toString(),
+    ];
+  }
+
+  static List<Object> toUpdateSQLData(Matiere Matiere) {
+    return [
+      Matiere.Libelle,
+      Matiere.CodeMatiere.toString(),
+      Matiere.Id,
     ];
   }
 }

@@ -22,12 +22,6 @@ class PreferenceService {
     await preferences.setString(Constant.PseudoKey, data);
   }
 
-  static void UpdatePasswordKey(String data) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    await preferences.reload();
-    await preferences.setString(Constant.EcoleIdsKey, data);
-  }
-
   static Future<String?> GetParendId() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.reload();
@@ -49,7 +43,7 @@ class PreferenceService {
   static void SetParendParentName(String data) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.reload();
-    await preferences.setString(Constant.ParentIdKey, data);
+    await preferences.setString(Constant.ParentNameKey, data);
   }
 
   static void SetParentParentNom(String data) async {
@@ -76,10 +70,22 @@ class PreferenceService {
     return (await preferences.getString(Constant.ParentPseudoKey));
   }
 
+  static Future<String?> GetParendPassword() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    return (await preferences.getString(Constant.ParentPasswordKey));
+  }
+
   static void SetParendParentPseudo(String data) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.reload();
-    await preferences.setString(Constant.ParentIdKey, data);
+    await preferences.setString(Constant.ParentPseudoKey, data);
+  }
+
+  static void SetParendParentPassword(String data) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    await preferences.setString(Constant.ParentPasswordKey, data);
   }
 
   static void SetNotificationPreference(bool data) async {

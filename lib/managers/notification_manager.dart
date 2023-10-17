@@ -19,9 +19,20 @@ class NotificationModelManager {
 
   Future<int> updateData(NotificationModel data) async {
     var database = await initData();
-    int count = await database.rawUpdate(
-        NotificationModel.getUpdateDefinition(),
-        NotificationModel.toSQLData(data));
+
+    int? nbr = Sqflite.firstIntValue(await database.rawQuery(
+        "SELECT COUNT(*) FROM NotificationModel where Id = '${data.Id}' "));
+    int count = 0;
+    if (nbr != null) {
+      if (nbr > 0) {
+        count = await database.rawUpdate(
+            NotificationModel.getUpdateDefinition(),
+            NotificationModel.toUpdateSQLData(data));
+      } else {
+        await insertData(data);
+      }
+    }
+
     database.close();
     return count;
   }
@@ -39,6 +50,6 @@ class NotificationModelManager {
         await database.rawQuery(NotificationModel.getSelectDefinition());
     database.close();
     return List.generate(
-        list.length, (i) => NotificationModel.fromJson(list[i]));
+        list.length, (i) => NotificationModel.fromSQL(list[i]));
   }
 }

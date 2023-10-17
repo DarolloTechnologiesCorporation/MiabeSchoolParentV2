@@ -8,11 +8,18 @@ class MatiereData {
   MatiereApiService matiereApiService = MatiereApiService();
 
   Future<List<Matiere>?> getData() async {
-    if (await ConnectionService.isConnected()) {
-      var data = await matiereApiService.getData();
-      updateMatiere(data);
-      return data;
-    } else {
+    try {
+      if (await ConnectionService.isConnected()) {
+        var data = await matiereApiService.getData();
+        if (data != null) {
+          updateMatiere(data);
+          return data;
+        }
+        return await matiereManager.getData();
+      } else {
+        return await matiereManager.getData();
+      }
+    } catch (e) {
       return await matiereManager.getData();
     }
   }

@@ -8,11 +8,18 @@ class EtudiantData {
   EtudiantApiService etudiantApiService = EtudiantApiService();
 
   Future<List<Etudiant>?> getData() async {
-    if (await ConnectionService.isConnected()) {
-      var data = await etudiantApiService.getData();
-      updateEtudiant(data);
-      return data;
-    } else {
+    try {
+      if (await ConnectionService.isConnected()) {
+        var data = await etudiantApiService.getData();
+        if (data != null) {
+          updateEtudiant(data);
+          return data;
+        }
+        return await etudiantManager.getData();
+      } else {
+        return await etudiantManager.getData();
+      }
+    } catch (e) {
       return await etudiantManager.getData();
     }
   }

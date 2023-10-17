@@ -8,6 +8,7 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:quiz_prokit/services/connection_service.dart';
+import 'package:quiz_prokit/services/paiement_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BackgroundService {
@@ -146,6 +147,7 @@ class BackgroundService {
       );
     });
     ConnectionService.SubscribeForConnectionChange();
+    //PaiementService.initPaiementServiceHandler();
     // SignalRService.initPlatformState();
   }
 }

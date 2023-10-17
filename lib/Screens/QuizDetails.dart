@@ -142,6 +142,7 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/Screens/QuizCard.dart';
 import 'package:quiz_prokit/Screens/classe.dart';
+import 'package:quiz_prokit/Screens/indicator.dart';
 import 'package:quiz_prokit/middleware/periode_data_midleware.dart';
 import 'package:quiz_prokit/model/periode.dart';
 
@@ -163,6 +164,7 @@ class _QuizDetailsState extends State<QuizDetails> {
   PeriodeData periodeData = PeriodeData();
   String etudiantId;
   String? selectedPeriodeId;
+  bool isBusy = false;
 
   _QuizDetailsState({required this.etudiantId});
   late List<Periode> periodes = [];
@@ -174,28 +176,40 @@ class _QuizDetailsState extends State<QuizDetails> {
   }
 
   void getData() async {
+    setState(() {
+      isBusy = true;
+    });
     var data = await periodeData.getData(etudiantId);
     setState(() {
       periodes = data.validate();
+      isBusy = false;
     });
   }
 
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: ListView.builder(
-        itemCount: periodes.length,
-        itemBuilder: (context, index) {
-          final periode = periodes[index];
-          return GestureDetector(
-            child: buildCard(periode, width, context),
-            onTap: () {
-              setState(() {
-                selectedPeriodeId = periode.Id;
-              });
+      body: Stack(
+        children: [
+          ListView.builder(
+            itemCount: periodes.length,
+            itemBuilder: (context, index) {
+              final periode = periodes[index];
+              return GestureDetector(
+                child: buildCard(periode, width, context),
+                onTap: () {
+                  setState(() {
+                    selectedPeriodeId = periode.Id;
+                  });
+                },
+              );
             },
-          );
-        },
+          ),
+          Visibility(
+            child: MiabeSchoolIndicatorView(),
+            visible: isBusy,
+          ),
+        ],
       ),
     );
   }
@@ -236,7 +250,7 @@ class _QuizDetailsState extends State<QuizDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Mes Notes',
+                  Text(periode.AnneAcademique,
                       style: TextStyle(
                           color:
                               quiz_textColorSecondary)), // Remplacez 'Type' par model.type

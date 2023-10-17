@@ -6,14 +6,23 @@ import '../services/connection_service.dart';
 
 class NotificationModelData {
   NotificationModelManager notificationManager = NotificationModelManager();
-  NotificationModelApiService notificationApiService = NotificationModelApiService();
+  NotificationModelApiService notificationApiService =
+      NotificationModelApiService();
 
   Future<List<NotificationModel>?> getData() async {
-    if (await ConnectionService.isConnected()) {
-      var data = await notificationApiService.getData();
-      updateNotificationModel(data);
+    try {
+      if (await ConnectionService.isConnected()) {
+        var data = await notificationApiService.getData();
+        if (data != null) {
+          updateNotificationModel(data);
+          return data;
+        }
+        return await notificationManager.getData();
+      }
+      return await notificationManager.getData();
+    } catch (e) {
+      return await notificationManager.getData();
     }
-    return await notificationManager.getData();
   }
 
   Future<void> updateNotificationModel(List<NotificationModel>? data) async {

@@ -18,8 +18,18 @@ class TypeCompositionManager {
 
   Future<int> updateData(TypeComposition data) async {
     var database = await initData();
-    int count = await database.rawUpdate(
-        TypeComposition.getUpdateDefinition(), TypeComposition.toSQLData(data));
+    int? nbr = Sqflite.firstIntValue(await database.rawQuery(
+        "SELECT COUNT(*) FROM TypeComposition where Id = '${data.Id}' "));
+    int count = 0;
+    if (nbr != null) {
+      if (nbr > 0) {
+        count = await database.rawUpdate(TypeComposition.getUpdateDefinition(),
+            TypeComposition.toUpdateSQLData(data));
+      } else {
+        await insertData(data);
+      }
+    }
+
     database.close();
     return count;
   }

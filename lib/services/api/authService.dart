@@ -1,13 +1,28 @@
 import 'dart:convert';
-
+import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/helpers/constant.dart';
 import 'package:quiz_prokit/model/authModel.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:quiz_prokit/services/connection_service.dart';
 import 'preference_service.dart';
 
 class AuthService {
   Future<bool> login(LoginDTO login) async {
+    if ((await ConnectionService.getConnectionState()) ==
+        ConnectivityResult.none) {
+      return localLogin(login);
+    } else {
+      return apiLogin(login);
+    }
+  }
+
+  Future<bool> localLogin(LoginDTO login) async {
+    var pseudo = await PreferenceService.GetParendPseudo();
+    var password = await PreferenceService.GetParendPassword();
+    return (password == login.Password && pseudo == login.Pseudo);
+  }
+
+  Future<bool> apiLogin(LoginDTO login) async {
     var client = http.Client();
     String link = "${Constant.API_LINK}/parents/account/login";
     var response = await client.post(
@@ -24,9 +39,9 @@ class AuthService {
     if (response.statusCode == 200) {
       var temp = json.decode(response.body);
       Constant.TOKEN = temp["token"];
-      PreferenceService.UpdatePseudoKey(login.Pseudo);
+      PreferenceService.SetParendParentPseudo(login.Pseudo);
       PreferenceService.SetParendId(temp["id"]);
-      PreferenceService.UpdatePasswordKey(login.Password);
+      PreferenceService.SetParendParentPassword(login.Password);
       // var matricules = temp["matricules"] as List<String>;
       // PreferenceService.UpdateEcoleIdsKey(matricules);
       return true;
@@ -54,6 +69,7 @@ class AuthService {
         PreferenceService.SetParendParentName(
             "${registerDTO.Nom} ${registerDTO.Prenom}");
         PreferenceService.SetParendParentPseudo(registerDTO.Pseudo);
+        PreferenceService.SetParendParentPassword(registerDTO.Password);
         setParentInfo(registerDTO);
         return true;
       }
