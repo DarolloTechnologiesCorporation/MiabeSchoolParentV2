@@ -16,9 +16,9 @@ class ConnectionService {
   }
 
   static void SubscribeForConnectionChange() async {
-    var connexion = await PreferenceService.getConnexionPreference();
     SignalRService.initPlatformState();
     Connectivity().onConnectivityChanged.listen((result) async {
+    var connexion = await PreferenceService.getConnexionPreference();
       if (result != ConnectivityResult.none) {
         if (!BackgroundService.isServiceRunning) {
           SignalRService.initPlatformState();

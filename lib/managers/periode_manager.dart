@@ -27,12 +27,14 @@ class PeriodeManager {
         count = await database.rawUpdate(
             Periode.getUpdateDefinition(), Periode.toUpdateSQLData(data));
       } else {
-        await database.close();
-        await insertData(data);
+        await database.transaction((txn) async {
+          await txn.rawInsert(
+              Periode.getInsertDefinition(), Periode.toSQLData(data));
+        });
       }
     }
 
-    database.close();
+    //  database.close();
     return count;
   }
 
@@ -57,6 +59,7 @@ class PeriodeManager {
           "Libelle",
           "EtudiantId",
           "Datedebut",
+          "AnneAcademique",
           "Datefin",
         ],
         where: 'EtudiantId = ?',

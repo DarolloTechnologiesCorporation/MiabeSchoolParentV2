@@ -49,9 +49,9 @@ class USSDService {
         if (suscriptionId != null) {
           try {
             if (suscriptionId == -3) {
-              rep = await UssdAdvanced.sendAdvancedUssd(code: code);
+              await UssdAdvanced.sendUssd(code: code);
             } else {
-              rep = await UssdAdvanced.sendAdvancedUssd(
+              await UssdAdvanced.sendUssd(
                   code: code, subscriptionId: suscriptionId);
             }
           } catch (e) {

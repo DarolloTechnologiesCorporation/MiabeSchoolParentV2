@@ -1,3 +1,4 @@
+import 'package:nb_utils/nb_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../helpers/constant.dart';
@@ -128,5 +129,42 @@ class PreferenceService {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.reload();
     return (await preferences.getString(Constant.ParentContactKey));
+  }
+
+  static Future<bool?> getPaiementInit() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    return (await preferences.getBool(Constant.PaiementInitKey));
+  }
+
+  static Future<bool?> getPaiementVerification() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    return (await preferences.getBool(Constant.PaiementVerificationKey));
+  }
+
+  static void setPaiementInit(bool data) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    await preferences.setBool(Constant.PaiementInitKey, data);
+  }
+
+  static Future<DateTime?> getPaiementInitDate() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    return DateTime.parse(
+        (await preferences.getString(Constant.PaiementDateInitKey)).validate());
+  }
+
+  static void setPaiementInitDate(String data) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    await preferences.setString(Constant.PaiementDateInitKey, data);
+  }
+
+  static void setPaiementVerification(bool data) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.reload();
+    await preferences.setBool(Constant.PaiementVerificationKey, data);
   }
 }

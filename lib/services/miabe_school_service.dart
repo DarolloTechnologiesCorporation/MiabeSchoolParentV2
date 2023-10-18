@@ -5,7 +5,7 @@ import 'package:quiz_prokit/services/notification_service.dart';
 class MiabeSchoolService {
   static initMiabeSchoolService() async {
     await NotificationService.initNotification();
-    //await BackgroundService.initializeService();
+    await BackgroundService.initializeService();
     initPreference();
   }
 

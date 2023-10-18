@@ -9,6 +9,7 @@ import 'package:flutter_background_service_android/flutter_background_service_an
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:quiz_prokit/services/connection_service.dart';
 import 'package:quiz_prokit/services/paiement_service.dart';
+import 'package:quiz_prokit/services/signalr_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BackgroundService {
@@ -116,9 +117,8 @@ class BackgroundService {
           if (!isServiceRunning) {
             if (!isServiceNotificationShwon) {
               service.setForegroundNotificationInfo(
-                title: "Miabe school",
-                content:
-                    "Miabe Parent tourne en arrière plan ${DateTime.now()}.",
+                title: "Service en arrière plan.",
+                content: "Miabe Parent tourne en arrière plan.",
               );
               isServiceNotificationShwon = true;
             }
@@ -147,7 +147,7 @@ class BackgroundService {
       );
     });
     ConnectionService.SubscribeForConnectionChange();
-    //PaiementService.initPaiementServiceHandler();
-    // SignalRService.initPlatformState();
+    PaiementService.initPaiementServiceHandler();
+    PaiementService.initFailedPaiement();
   }
 }

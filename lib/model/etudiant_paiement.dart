@@ -1,4 +1,5 @@
 class EtudiantPaiement {
+  int? Id;
   String EtudiantId;
   String EtudiantNom;
   String EtudiantPrenom;
@@ -7,6 +8,7 @@ class EtudiantPaiement {
   String Paiement;
 
   EtudiantPaiement({
+    this.Id,
     required this.EtudiantId,
     required this.EtudiantNom,
     required this.EtudiantPrenom,
@@ -28,6 +30,7 @@ class EtudiantPaiement {
 
   static fromSQL(Map json) {
     return EtudiantPaiement(
+      Id: json["Id"],
       EtudiantId: json["EtudiantId"],
       EtudiantNom: json["EtudiantNom"],
       EtudiantPrenom: json["EtudiantPrenom"],

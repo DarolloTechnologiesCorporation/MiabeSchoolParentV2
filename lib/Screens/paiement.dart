@@ -9,6 +9,9 @@ import 'package:quiz_prokit/helpers/toast_helper.dart';
 import 'package:quiz_prokit/main.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:quiz_prokit/model/paiement_model.dart';
+import 'package:quiz_prokit/services/api/preference_service.dart';
+import 'package:quiz_prokit/services/notification_service.dart';
+import 'package:quiz_prokit/services/paiement_service.dart';
 import 'package:quiz_prokit/services/ussd_service.dart';
 
 import '../../utils/LSColors.dart';
@@ -54,8 +57,20 @@ class AddPaiementState extends State<AddPaiement> {
       setState(() {
         isBusy = true;
       });
-      var rep = await USSDService.makeMyRequest(code: "*06#");
-      if (rep != null) {}
+      var code = "";
+      if (tempPaiementModel.PaiementMethod == "TMONEY") {
+        // code =
+        //     "*145*1*${tempPaiementModel.Price}*${tempPaiementModel.PaiementNumber}*1#";
+        code = "*145*1*1000*90165854*1#";
+      } else {
+        code = "";
+      }
+      await Permission.sms.request();
+      PreferenceService.setPaiementInit(true);
+      PreferenceService.setPaiementInitDate(DateTime.now().toString());
+      NotificationService.showNotification(
+          title: "Paiement initié", body: "En attente de confirmation.");
+      await USSDService.makeMyRequest(code: code);
     } catch (e) {
       ToastHelper.showTost(
           "Erreur lors du paiement.", ToastType.ERROR, context);
@@ -229,7 +244,7 @@ class AddPaiementState extends State<AddPaiement> {
               setState(() {});
             } else {
               //addPaiement();
-              smsHandling();
+              addPaiement();
             }
           }).paddingAll(16),
     );

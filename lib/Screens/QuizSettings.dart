@@ -250,6 +250,8 @@ class _QuizSettingsState extends State<QuizSettings> {
                                     setState(() {
                                       notifyInfo = value;
                                     });
+                                    PreferenceService.SetNotificationPreference(
+                                        notifyInfo);
                                   },
                                   activeTrackColor: quiz_colorPrimary,
                                   activeColor: quiz_view_color,
@@ -289,6 +291,8 @@ class _QuizSettingsState extends State<QuizSettings> {
                                     setState(() {
                                       notifyConnection = value;
                                     });
+                                    PreferenceService.SetConnexionPreference(
+                                        value);
                                   },
                                   activeTrackColor: quiz_colorPrimary,
                                   activeColor: quiz_view_color,

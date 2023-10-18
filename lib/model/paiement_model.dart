@@ -5,6 +5,8 @@ class PaiementModel {
   String PaiementMethod = "";
   String PaiementNumber = "";
   String PaiementFee = "";
+  String PaiementFraisId = "";
+  String PaiementReference = "";
 }
 
 PaiementModel tempPaiementModel = PaiementModel();

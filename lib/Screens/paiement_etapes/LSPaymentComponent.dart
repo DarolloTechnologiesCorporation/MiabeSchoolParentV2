@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_prokit/model/paiement_model.dart';
 import 'package:quiz_prokit/utils/LSWidgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -16,6 +17,83 @@ class LSPaymentComponentState extends State<LSPaymentComponent> {
   int? currentTimeValue = 0;
   int? index = 0;
   // List<LSSelectionModel>? paymentList = [];
+
+  Color starColor = Colors.red;
+
+  addPayementMethodView() {
+    const double height = 70;
+    const double width = 100;
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 20),
+      height: 100,
+      child: Row(
+        // This next line does the trick.
+        // scrollDirection: Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Card(
+            clipBehavior: Clip.hardEdge,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                color: tempPaiementModel.PaiementMethod == "TMONEY"
+                    ? starColor
+                    : const Color.fromARGB(0, 209, 70, 70),
+                width: 1.5,
+              ),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
+            child: InkWell(
+              splashColor: starColor,
+              onTap: () {
+                setState(() {
+                  tempPaiementModel.PaiementMethod = "TMONEY";
+                });
+              },
+              child: Container(
+                width: width,
+                height: height,
+                child: Image.asset(
+                  "assets/image/TMoney.jpg",
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Card(
+            clipBehavior: Clip.hardEdge,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                width: 1.5,
+                color: tempPaiementModel.PaiementMethod == "Flooz"
+                    ? starColor
+                    : Colors.transparent,
+              ),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
+            child: InkWell(
+              splashColor: starColor,
+              onTap: () {
+                setState(() {
+                  tempPaiementModel.PaiementMethod = "Flooz";
+                });
+              },
+              child: Container(
+                width: width,
+                height: height,
+                child: Image.asset(
+                  "assets/image/Flooz.png",
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -51,68 +129,17 @@ class LSPaymentComponentState extends State<LSPaymentComponent> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Divider(height: 2),
-            Container(
-                color: context.scaffoldBackgroundColor,
-                padding: EdgeInsets.all(16),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    commonCacheImageWidget(
-                            'https://i.pinimg.com/564x/1a/93/6c/1a936c2a7a60e9900f98d3a77d057599.jpg',
-                            70,
-                            width: 80,
-                            fit: BoxFit.cover)
-                        .cornerRadiusWithClipRRect(8),
-                    16.width,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        4.height,
-                        Text('XPress Laundry', style: boldTextStyle()),
-                        4.height,
-                        Text('145 Valencia St, San Francisco',
-                            style: secondaryTextStyle()),
-                      ],
-                    ).expand()
-                  ],
-                )),
             Text('Méthode de paiement', style: boldTextStyle())
                 .paddingOnly(left: 16, right: 16, top: 16),
-            Container(
-              margin: EdgeInsets.all(12),
-              padding: EdgeInsets.all(12),
-              decoration: boxDecorationWithRoundedCorners(
-                  backgroundColor: context.cardColor),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Sub Total', style: boldTextStyle()),
-                      Text('\$220.50', style: primaryTextStyle()),
-                    ],
-                  ),
-                  4.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Tax', style: boldTextStyle()),
-                      Text('\$20.25', style: primaryTextStyle()),
-                    ],
-                  ),
-                  Divider(thickness: 1),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Total', style: boldTextStyle()),
-                      Text('\$240.75', style: boldTextStyle()),
-                    ],
-                  ),
-                ],
+            20.height,
+            Center(
+              child: Text(
+                "Sélectionnez votre moyen de paiement.",
+                style: TextStyle(fontSize: 18),
               ),
             ),
+            8.height,
+            addPayementMethodView(),
             Text('Moyen de paiement', style: boldTextStyle())
                 .paddingOnly(left: 16, right: 16, top: 16),
             Container(
