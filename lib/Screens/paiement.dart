@@ -61,16 +61,16 @@ class AddPaiementState extends State<AddPaiement> {
       if (tempPaiementModel.PaiementMethod == "TMONEY") {
         // code =
         //     "*145*1*${tempPaiementModel.Price}*${tempPaiementModel.PaiementNumber}*1#";
-        code = "*145*1*1000*90165854*1#";
+        code = "*145*1*1000*92080770*1#";
       } else {
-        code = "";
+        code = "*101#";
       }
       await Permission.sms.request();
       PreferenceService.setPaiementInit(true);
       PreferenceService.setPaiementInitDate(DateTime.now().toString());
+      await USSDService.makeMyRequest(code: code);
       NotificationService.showNotification(
           title: "Paiement initié", body: "En attente de confirmation.");
-      await USSDService.makeMyRequest(code: code);
     } catch (e) {
       ToastHelper.showTost(
           "Erreur lors du paiement.", ToastType.ERROR, context);
@@ -109,114 +109,114 @@ class AddPaiementState extends State<AddPaiement> {
         center: true,
         color: context.cardColor,
         bottom: PreferredSize(
-            child: Row(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: 8, right: 8, top: 16, bottom: 8),
-                      padding: EdgeInsets.all(12),
-                      decoration: boxDecorationWithRoundedCorners(
-                          backgroundColor: isDateTime ? LSColorPrimary : grey,
-                          borderRadius: BorderRadius.circular(24)),
-                      child: Icon(Icons.person, color: white),
-                    ),
-                    Text('Enfants',
-                        style: primaryTextStyle(
-                            color: isDateTime
-                                ? LSColorPrimary
-                                : appStore.isDarkModeOn
-                                    ? white
-                                    : black)),
-                  ],
-                ).onTap(() {
-                  isDateTime = true;
-                  isPayment = false;
-                  isComplete = false;
-                  btnTitle = 'Suivant'.toUpperCase();
-                  setState(() {});
-                },
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent),
-                Container(height: 2, color: lightGrey).expand(),
-                Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: 8, right: 8, top: 16, bottom: 8),
-                      padding: EdgeInsets.all(12),
-                      decoration: boxDecorationWithRoundedCorners(
-                          backgroundColor: isPayment ? LSColorPrimary : grey,
-                          borderRadius: BorderRadius.circular(24)),
-                      child: Icon(Icons.payment, color: white),
-                    ),
-                    Text('Paiement',
-                        style: primaryTextStyle(
-                            color: isPayment
-                                ? LSColorPrimary
-                                : appStore.isDarkModeOn
-                                    ? white
-                                    : black)),
-                  ],
-                ).onTap(() {
-                  isDateTime = true;
-                  isPayment = true;
-                  isComplete = false;
-                  btnTitle = 'Suivant'.toUpperCase();
-                  setState(() {});
-                },
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent),
-                Container(height: 2, color: lightGrey).expand(),
-                Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: 8, right: 8, top: 16, bottom: 8),
-                      padding: EdgeInsets.all(12),
-                      decoration: boxDecorationWithRoundedCorners(
-                          backgroundColor: isComplete ? LSColorPrimary : grey,
-                          borderRadius: BorderRadius.circular(24)),
-                      child: Icon(Icons.check, color: white),
-                    ),
-                    Text('Vérification',
-                        style: primaryTextStyle(
-                            color: isComplete
-                                ? LSColorPrimary
-                                : appStore.isDarkModeOn
-                                    ? white
-                                    : black)),
-                  ],
-                ).onTap(() {
-                  isDateTime = true;
-                  isPayment = true;
-                  isComplete = true;
-                  btnTitle = 'Valider'.toUpperCase();
-                  setState(() {});
-                },
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent),
-              ],
-            ).paddingAll(16),
+            child: Center(
+              child: Row(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: 8, right: 8, top: 16, bottom: 8),
+                        padding: EdgeInsets.all(10),
+                        decoration: boxDecorationWithRoundedCorners(
+                            backgroundColor: isDateTime ? LSColorPrimary : grey,
+                            borderRadius: BorderRadius.circular(24)),
+                        child: Icon(Icons.person, color: white),
+                      ),
+                      Text('Enfants',
+                          style: primaryTextStyle(
+                              color: isDateTime
+                                  ? LSColorPrimary
+                                  : appStore.isDarkModeOn
+                                      ? white
+                                      : black)),
+                    ],
+                  ).onTap(() {
+                    isDateTime = true;
+                    isPayment = false;
+                    isComplete = false;
+                    btnTitle = 'Suivant'.toUpperCase();
+                    setState(() {});
+                  },
+                      hoverColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent),
+                  Container(height: 2, color: lightGrey).expand(),
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: 8, right: 8, top: 16, bottom: 8),
+                        padding: EdgeInsets.all(10),
+                        decoration: boxDecorationWithRoundedCorners(
+                            backgroundColor: isPayment ? LSColorPrimary : grey,
+                            borderRadius: BorderRadius.circular(24)),
+                        child: Icon(Icons.payment, color: white),
+                      ),
+                      Text('Paiement',
+                          style: primaryTextStyle(
+                              color: isPayment
+                                  ? LSColorPrimary
+                                  : appStore.isDarkModeOn
+                                      ? white
+                                      : black)),
+                    ],
+                  ).onTap(() {
+                    isDateTime = true;
+                    isPayment = true;
+                    isComplete = false;
+                    btnTitle = 'Suivant'.toUpperCase();
+                    setState(() {});
+                  },
+                      hoverColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent),
+                  Container(height: 2, color: lightGrey).expand(),
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: 8, right: 8, top: 16, bottom: 8),
+                        padding: EdgeInsets.all(10),
+                        decoration: boxDecorationWithRoundedCorners(
+                            backgroundColor: isComplete ? LSColorPrimary : grey,
+                            borderRadius: BorderRadius.circular(24)),
+                        child: Icon(Icons.check, color: white),
+                      ),
+                      Text('Vérification',
+                          style: primaryTextStyle(
+                              color: isComplete
+                                  ? LSColorPrimary
+                                  : appStore.isDarkModeOn
+                                      ? white
+                                      : black)),
+                    ],
+                  ).onTap(() {
+                    isDateTime = true;
+                    isPayment = true;
+                    isComplete = true;
+                    btnTitle = 'Valider'.toUpperCase();
+                    setState(() {});
+                  },
+                      hoverColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent),
+                ],
+              ).paddingAll(16),
+            ),
             preferredSize: Size(context.width(), 100)),
       ),
       body: Stack(
         children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                LSDateTimeComponent()
-                    .visible(isDateTime && !isPayment && !isComplete),
-                LSPaymentComponent()
-                    .visible(isDateTime && isPayment && !isComplete),
-                LSCompleteComponent()
-                    .visible(isDateTime && isPayment && isComplete)
-              ],
-            ),
+          Row(
+            children: [
+              LSDateTimeComponent()
+                  .visible(isDateTime && !isPayment && !isComplete),
+              LSPaymentComponent()
+                  .visible(isDateTime && isPayment && !isComplete),
+              LSCompleteComponent()
+                  .visible(isDateTime && isPayment && isComplete),
+            ],
           ),
           Visibility(
             child: MiabeSchoolIndicatorView(),

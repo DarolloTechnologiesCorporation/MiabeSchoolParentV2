@@ -26,7 +26,7 @@ class PreferenceService {
   static Future<String?> GetParendId() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.reload();
-    return (await preferences.getString(Constant.ParentIdKey));
+    return (await preferences.getString(Constant.ParentNameKey));
   }
 
   static Future<String?> GetParendName() async {

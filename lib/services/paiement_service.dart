@@ -45,7 +45,7 @@ class PaiementService {
               NotificationService.showNotification(
                   title: "Confirmation de paiement.",
                   body: "Avez vous éffectué le paiement?");
-              PreferenceService.setPaiementVerification(true);
+              PreferenceService.setPaiementVerification(true);  
             }
           }
         }

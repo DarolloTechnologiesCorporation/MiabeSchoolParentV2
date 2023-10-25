@@ -59,56 +59,65 @@ class LSDateTimeComponentState extends State<LSDateTimeComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Expanded(
       child: Container(
-        height: context.height(),
-        width: context.width(),
         color: appStore.isDarkModeOn
             ? context.scaffoldBackgroundColor
-            : LSColorSecondary.withOpacity(0.55),
+            : Colors.white,
         padding: EdgeInsets.all(8),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            FastAutocomplete<Etudiant>(
-              name: 'autocomplete',
-              labelText: 'Enfant',
-              helperText: "Saisissez le nom de votre enfant",
-              onSelected: (option) {
-                setState(() {
-                  tempPaiementModel.EtudiantName =
-                      option.Nom + " " + option.Prenom;
-                  tempPaiementModel.EtudiantId = option.Id;
-                });
-              },
-              options: etudiants,
-              optionsBuilder: (TextEditingValue textEditingValue) {
-                if (textEditingValue.text == '') {
-                  return const Iterable<Etudiant>.empty();
-                }
-                return etudiants.where((option) =>
-                    option.Nom.toLowerCase()
-                        .contains(textEditingValue.text.toLowerCase()) ||
-                    option.Prenom.toLowerCase()
-                        .contains(textEditingValue.text.toLowerCase()));
-              },
-              displayStringForOption: (option) {
-                return option.Nom + " " + option.Prenom;
-              },
-            ),
-            30.height,
-            FastAutocomplete<String>(
-              name: 'autocomplete',
-              onSelected: (option) {
-                print(option);
-              },
-              onSaved: (newValue) {
-                print(newValue);
-              },
-              onChanged: (value) {},
-              labelText: 'Frais',
-              helperText: "Saisissez les frais que vous voulez payer",
-              options: const ['Alaska', 'Alabama', 'Connecticut', 'Delaware'],
+            Expanded(
+              child: Column(
+                children: [
+                  FastAutocomplete<Etudiant>(
+                    name: 'autocomplete',
+                    labelText: 'Enfant',
+                    helperText: "Saisissez le nom de votre enfant",
+                    onSelected: (option) {
+                      setState(() {
+                        tempPaiementModel.EtudiantName =
+                            option.Nom + " " + option.Prenom;
+                        tempPaiementModel.EtudiantId = option.Id;
+                      });
+                    },
+                    options: etudiants,
+                    optionsBuilder: (TextEditingValue textEditingValue) {
+                      if (textEditingValue.text == '') {
+                        return const Iterable<Etudiant>.empty();
+                      }
+                      return etudiants.where((option) =>
+                          option.Nom.toLowerCase()
+                              .contains(textEditingValue.text.toLowerCase()) ||
+                          option.Prenom.toLowerCase()
+                              .contains(textEditingValue.text.toLowerCase()));
+                    },
+                    displayStringForOption: (option) {
+                      return option.Nom + " " + option.Prenom;
+                    },
+                  ),
+                  FastAutocomplete<String>(
+                    name: 'autocomplete',
+                    onSelected: (option) {
+                      print(option);
+                    },
+                    onSaved: (newValue) {
+                      print(newValue);
+                    },
+                    onChanged: (value) {},
+                    labelText: 'Frais',
+                    helperText: "Saisissez les frais que vous voulez payer",
+                    options: const [
+                      'Alaska',
+                      'Alabama',
+                      'Connecticut',
+                      'Delaware'
+                    ],
+                  )
+                ],
+              ),
             ),
           ],
         ).paddingAll(8),

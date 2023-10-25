@@ -21,7 +21,7 @@ class USSDService {
       if (sim0.mnc == mnc) {
         return sus0;
       } else if (sim1.mnc == mnc) {
-        return sus0;
+        return sus1;
       } else {
         return -3;
       }
@@ -43,22 +43,13 @@ class USSDService {
         if (code.contains("*145*")) {
           simName = "TOGOCEL";
         }
-        int mnc = await getSimMNC(simName);
-        int? suscriptionId = await getSubscriptionId(mnc: mnc);
+        int suscriptionId = await getSimSubscriptionId(simName);
 
-        if (suscriptionId != null) {
-          try {
-            if (suscriptionId == -3) {
-              await UssdAdvanced.sendUssd(code: code);
-            } else {
-              await UssdAdvanced.sendUssd(
-                  code: code, subscriptionId: suscriptionId);
-            }
-          } catch (e) {
-            print(e);
-          }
-        } else {
-          print("suscriptionId null");
+        try {
+          await UssdAdvanced.sendUssd(
+              code: code, subscriptionId: suscriptionId);
+        } catch (e) {
+          print(e);
         }
       } catch (e) {
         print(e);
@@ -70,17 +61,37 @@ class USSDService {
     return rep;
   }
 
-  static Future<int> getSimMNC([String simCarrierName = "TOGOCEL"]) async {
+  // static Future<int> getSimMNC([String simCarrierName = "TOGOCEL"]) async {
+  //   try {
+  //     SimData simData = await SimDataPlugin.getSimData();
+  //     if (simData.cards.isNotEmpty) {
+  //       for (var element in simData.cards) {
+  //         if (element.carrierName == simCarrierName) {
+  //           return element.mnc;
+  //         }
+  //       }
+  //       int mnc = simData.cards[0].mnc;
+  //       return mnc;
+  //     } else {
+  //       int mnc = -10;
+  //       return mnc;
+  //     }
+  //   } catch (e) {
+  //     throw ("Une erreur s'est produite lors de la récupération des informations de la carte SIM : $e");
+  //   }
+  // }
+
+  static Future<int> getSimSubscriptionId(
+      [String simCarrierName = "TOGOCEL"]) async {
     try {
       SimData simData = await SimDataPlugin.getSimData();
       if (simData.cards.isNotEmpty) {
         for (var element in simData.cards) {
           if (element.carrierName == simCarrierName) {
-            return element.mnc;
+            return element.subscriptionId;
           }
         }
-        int mnc = simData.cards[0].mnc;
-        return mnc;
+        return simData.cards[0].subscriptionId;
       } else {
         int mnc = -10;
         return mnc;

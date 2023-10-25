@@ -60,12 +60,18 @@ class LSCompleteComponentState extends State<LSCompleteComponent> {
               ),
             ),
             16.height,
-            Text('Récaputilatif sur votre paiement',
-                    style: boldTextStyle(size: 20))
-                .center(),
+            Center(
+              child: Text(
+                'Récaputilatif sur votre paiement',
+                style: boldTextStyle(size: 20),
+                textAlign: TextAlign.center,
+              ),
+            ),
             8.height,
-            Text('Vérifiez les informations', style: primaryTextStyle())
-                .center(),
+            Center(
+              child:
+                  Text('Vérifiez les informations', style: primaryTextStyle()),
+            ),
             Container(
               margin: EdgeInsets.all(16),
               decoration: boxDecorationWithRoundedCorners(
@@ -74,52 +80,71 @@ class LSCompleteComponentState extends State<LSCompleteComponent> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   8.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Etudiant', style: boldTextStyle()),
-                      Text(tempPaiementModel.EtudiantName,
-                          style: primaryTextStyle()),
-                    ],
-                  ).paddingOnly(left: 16, right: 16, top: 8),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Etudiant', style: boldTextStyle()),
+                        Text(tempPaiementModel.EtudiantName,
+                            style: primaryTextStyle()),
+                      ],
+                    ),
+                  ),
                   4.height,
                   Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Montant', style: boldTextStyle()),
-                      Text(tempPaiementModel.Price + "Fcfa",
-                          style: primaryTextStyle()),
-                    ],
-                  ).paddingOnly(left: 16, right: 16, top: 8),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Montant', style: boldTextStyle()),
+                        Text(tempPaiementModel.Price + "Fcfa",
+                            style: primaryTextStyle()),
+                      ],
+                    ),
+                  ),
                   4.height,
                   Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Frais', style: boldTextStyle()),
-                      Text(tempPaiementModel.PaiementFee + "Fcfa",
-                          style: primaryTextStyle()),
-                    ],
-                  ).paddingOnly(left: 16, right: 16, top: 8),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Frais', style: boldTextStyle()),
+                        Text(tempPaiementModel.PaiementFee + "Fcfa",
+                            style: primaryTextStyle()),
+                      ],
+                    ),
+                  ),
                   4.height,
                   Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Numéro', style: boldTextStyle()),
-                      Text(tempPaiementModel.PaiementNumber,
-                          style: primaryTextStyle()),
-                    ],
-                  ).paddingOnly(left: 16, right: 16, top: 8),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Numéro', style: boldTextStyle()),
+                        Text(tempPaiementModel.PaiementNumber,
+                            style: primaryTextStyle()),
+                      ],
+                    ),
+                  ),
                   Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Moyen de paiement', style: boldTextStyle()),
-                      Text('Cash Delivery', style: primaryTextStyle()),
-                    ],
-                  ).paddingOnly(left: 16, right: 16, top: 8),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                            child: Text('Moyen de paiement',
+                                style: boldTextStyle())),
+                        Expanded(
+                            child: Text('Cash Delivery',
+                                style: primaryTextStyle())),
+                      ],
+                    ),
+                  ),
                   16.height,
                 ],
               ),

@@ -129,13 +129,20 @@ class LSPaymentComponentState extends State<LSPaymentComponent> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Méthode de paiement', style: boldTextStyle())
-                .paddingOnly(left: 16, right: 16, top: 16),
+            10.height,
+            Center(
+              child: Text(
+                'Méthode de paiement',
+                style: boldTextStyle(),
+                textAlign: TextAlign.center,
+              ),
+            ),
             20.height,
             Center(
               child: Text(
                 "Sélectionnez votre moyen de paiement.",
                 style: TextStyle(fontSize: 18),
+                textAlign: TextAlign.center,
               ),
             ),
             8.height,
